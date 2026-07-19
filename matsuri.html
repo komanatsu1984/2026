@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -868,32 +867,50 @@
 <script>
 // ===== DATA =====
 // 配置は src/booth-0714_3.jpg の会場図を90度回転（南口が上）。short=マップ上の短縮ラベル、name=ポップアップの正式名称。
+// menu: src/団体提出書類・メニュー確認リスト.xlsx の「メニュー・出店内容」より。実行委員ブース(id18-21)は台帳に団体行がないため未設定（確認待ち）。
 const stalls = [
   // 上段（旧右列）左→右
-  {id:12,name:{ja:"多摩大学",en:"Tama University"},short:{ja:"多摩大",en:"Tama Univ."},cat:"other",icon:"🎓",x:56,y:92},
-  {id:13,name:{ja:"光洋建設（藤沢南ロータリークラブ）",en:"Koyo Construction (Fujisawa Minami Rotary Club)"},short:{ja:"ロータリー",en:"Rotary"},cat:"food",icon:"🌭",x:118,y:92},
-  {id:14,name:{ja:"光友会",en:"Koyu-kai"},short:{ja:"光友会",en:"Koyu-kai"},cat:"food",icon:"🍗",x:180,y:92},
-  {id:15,name:{ja:"マイミライnext",en:"My Mirai next"},short:{ja:"マイミライ",en:"My Mirai"},cat:"food",icon:"🥤",x:242,y:92},
-  {id:16,name:{ja:"藤翠會",en:"Tosui-kai"},short:{ja:"藤翠會",en:"Tosui-kai"},cat:"food",icon:"☕",x:304,y:92},
-  {id:17,name:{ja:"Fish Loving Uncle",en:"Fish Loving Uncle"},short:{ja:"金魚Fish",en:"Goldfish"},cat:"game",icon:"🐟",x:366,y:92},
+  {id:12,name:{ja:"多摩大学",en:"Tama University"},short:{ja:"多摩大",en:"Tama Univ."},cat:"other",icon:"🎓",x:56,y:92,
+   menu:{ja:["イカ焼き"],en:["Grilled squid"]}},
+  {id:13,name:{ja:"光洋建設（藤沢南ロータリークラブ）",en:"Koyo Construction (Fujisawa Minami Rotary Club)"},short:{ja:"ロータリー",en:"Rotary"},cat:"food",icon:"🌭",x:118,y:92,
+   menu:{ja:["ホットドッグ","アイス","お菓子","ゲーム"],en:["Hot dog","Ice cream","Snacks","Games"]}},
+  {id:14,name:{ja:"光友会",en:"Koyu-kai"},short:{ja:"光友会",en:"Koyu-kai"},cat:"food",icon:"🍗",x:180,y:92,
+   menu:{ja:["焼きそば","唐揚げ","パン"],en:["Yakisoba","Fried chicken","Bread"]}},
+  {id:15,name:{ja:"マイミライnext",en:"My Mirai next"},short:{ja:"マイミライ",en:"My Mirai"},cat:"food",icon:"🥤",x:242,y:92,
+   menu:{ja:["アイスコーヒー 200円","アイスティー 200円","ジュース 100円"],en:["Iced coffee ¥200","Iced tea ¥200","Juice ¥100"]}},
+  {id:16,name:{ja:"藤翠會",en:"Tosui-kai"},short:{ja:"藤翠會",en:"Tosui-kai"},cat:"food",icon:"☕",x:304,y:92,
+   menu:{ja:["ビーズワークショップ 400円・500円","アクセサリーくじ 300〜400円"],en:["Beads workshop ¥400/¥500","Accessory lottery ¥300–400"]}},
+  {id:17,name:{ja:"Fish Loving Uncle",en:"Fish Loving Uncle"},short:{ja:"金魚Fish",en:"Goldfish"},cat:"game",icon:"🐟",x:366,y:92,
+   menu:{ja:["すくいポイ 200円","メダカボトル 500円","水草 1束100円"],en:["Scoop poi ¥200","Medaka bottle ¥500","Water plant ¥100/bunch"]}},
   // 左列（旧上段）上→下
-  {id:8,name:{ja:"Ms' Kitchen",en:"Ms' Kitchen"},short:{ja:"M's Kit.",en:"Ms' Kit."},cat:"food",icon:"🍳",x:50,y:160},
-  {id:7,name:{ja:"リフシア大庭",en:"Refucia Oba"},short:{ja:"リフシア",en:"Refucia"},cat:"food",icon:"🍡",x:50,y:234},
-  {id:6,name:{ja:"NPO法人煉成会",en:"NPO Rensei-kai"},short:{ja:"煉成会",en:"Rensei-kai"},cat:"other",icon:"🎁",x:50,y:308},
-  {id:5,name:{ja:"湘南スマイルカンパニー",en:"Shonan Smile Company"},short:{ja:"スマイル",en:"Smile"},cat:"food",icon:"🍺",x:50,y:382},
-  {id:4,name:{ja:"ことりのおうち",en:"Kotori no Ouchi"},short:{ja:"ことり",en:"Kotori"},cat:"food",icon:"🐦",x:50,y:456},
-  {id:3,name:{ja:"ワイドフェザー",en:"Wide Feather"},short:{ja:"ワイドフェザー",en:"Wide Feather"},cat:"other",icon:"🎨",x:50,y:530},
-  {id:2,name:{ja:"三嶽英治・三嶽裕紀子",en:"Eiji & Yukiko Mitake"},short:{ja:"三嶽さん",en:"Mitake"},cat:"food",icon:"🍧",x:50,y:604},
-  {id:1,name:{ja:"ぐるんとびー①・②",en:"Gurunto Bee ①・②"},short:{ja:"ぐるんとびー",en:"Gurunto Bee"},cat:"game",icon:"🎪",x:50,y:678,h:92},
-  // 右列（旧下段・実行委員）上→下
+  {id:8,name:{ja:"Ms' Kitchen",en:"Ms' Kitchen"},short:{ja:"M's Kit.",en:"Ms' Kit."},cat:"food",icon:"🍳",x:50,y:160,
+   menu:{ja:["ドリロコス","フランクフルト","焼きマシュマロ","削りイチゴ","冷凍チョコバナナ"],en:["Dorilocos","Frankfurter","Grilled marshmallow","Shaved strawberry","Frozen choco banana"]}},
+  {id:7,name:{ja:"リフシア大庭",en:"Refucia Oba"},short:{ja:"リフシア",en:"Refucia"},cat:"food",icon:"🍡",x:50,y:234,
+   menu:{ja:["たこ焼き（5〜6個）350円","クレープ（生クリーム/カスタード/バナナ/チョコ）300〜400円"],en:["Takoyaki (5–6pcs) ¥350","Crêpe (cream/custard/banana/choco) ¥300–400"]}},
+  {id:6,name:{ja:"NPO法人煉成会",en:"NPO Rensei-kai"},short:{ja:"煉成会",en:"Rensei-kai"},cat:"other",icon:"🎁",x:50,y:308,
+   menu:{ja:["チョコバナナ","チョコマシュマロ","フルーツサイダー（缶詰みかん等トッピング）"],en:["Choco banana","Choco marshmallow","Fruit soda (canned mikan topping, etc.)"]}},
+  {id:5,name:{ja:"湘南スマイルカンパニー",en:"Shonan Smile Company"},short:{ja:"スマイル",en:"Smile"},cat:"food",icon:"🍺",x:50,y:382,
+   menu:{ja:["ビール 400円","ラムネ 200円","お茶 200円","ジュース 200円","焼き鳥 150円","酎ハイ 300円"],en:["Beer ¥400","Ramune ¥200","Tea ¥200","Juice ¥200","Yakitori ¥150","Chuhai ¥300"]}},
+  {id:4,name:{ja:"ことりのおうち",en:"Kotori no Ouchi"},short:{ja:"ことり",en:"Kotori"},cat:"food",icon:"🐦",x:50,y:456,
+   menu:{ja:["焼きそば","ふわふわドーム","スーパーボールすくい","人形すくい","宝石すくい"],en:["Yakisoba","Bouncy dome","Super ball scoop","Doll scoop","Jewel scoop"]}},
+  {id:3,name:{ja:"ワイドフェザー",en:"Wide Feather"},short:{ja:"ワイドフェザー",en:"Wide Feather"},cat:"other",icon:"🎨",x:50,y:530,
+   menu:{ja:["ワークショップ（サンキャッチャー、ボールペン、シャーペン、キーホルダー、ミラー、くし、コースター等）"],en:["Workshops (suncatcher, pens, keychain, mirror, comb, coaster, etc.)"]}},
+  {id:2,name:{ja:"三嶽英治・三嶽裕紀子",en:"Eiji & Yukiko Mitake"},short:{ja:"三嶽さん",en:"Mitake"},cat:"food",icon:"🍧",x:50,y:604,
+   menu:{ja:["サーターアンダギー"],en:["Sata andagi (Okinawan doughnut)"]}},
+  {id:1,name:{ja:"ぐるんとびー①・②",en:"Gurunto Bee ①・②"},short:{ja:"ぐるんとびー",en:"Gurunto Bee"},cat:"game",icon:"🎪",x:50,y:678,h:92,
+   menu:{ja:["① かき氷、ジュース","② 射的、くじ"],en:["① Shaved ice, juice","② Shooting game, lottery"]}},
+  // 右列（旧下段・実行委員ブース：台帳に団体行なし）上→下
   {id:21,name:{ja:"スーパーボール・人形すくい",en:"Super Ball & Doll Scooping"},short:{ja:"Sボール人形",en:"Ball & Doll"},cat:"game",icon:"🥎",x:352,y:150},
   {id:20,name:{ja:"かき氷",en:"Shaved Ice"},short:{ja:"かき氷",en:"Shaved Ice"},cat:"food",icon:"🍧",x:352,y:224},
   {id:19,name:{ja:"ヨーヨーすくい",en:"Yo-yo Scooping"},short:{ja:"ヨーヨー",en:"Yo-yo"},cat:"game",icon:"🎈",x:352,y:298},
   {id:18,name:{ja:"焼き鳥・生ビール",en:"Yakitori & Beer"},short:{ja:"鳥・ビール",en:"Chicken & Beer"},cat:"food",icon:"🍢",x:352,y:372},
   // 下段（旧左列）左→右
-  {id:9,name:{ja:"学生団体えんあわせ",en:"Student Group En-awase"},short:{ja:"えんあわせ",en:"En-awase"},cat:"other",icon:"🎓",x:112,y:705},
-  {id:10,name:{ja:"学生団体 縁慈",en:"Student Group Enji"},short:{ja:"縁慈",en:"Enji"},cat:"game",icon:"🎯",x:205,y:705},
-  {id:11,name:{ja:"駒寄滝の沢SC",en:"Komayose Takinosawa SC"},short:{ja:"駒滝SC",en:"Takinosawa SC"},cat:"game",icon:"⚽",x:288,y:705},
+  {id:9,name:{ja:"学生団体えんあわせ",en:"Student Group En-awase"},short:{ja:"えんあわせ",en:"En-awase"},cat:"other",icon:"🎓",x:112,y:705,
+   menu:{ja:["駄菓子屋"],en:["Penny candy shop"]}},
+  {id:10,name:{ja:"学生団体 縁慈",en:"Student Group Enji"},short:{ja:"縁慈",en:"Enji"},cat:"game",icon:"🎯",x:205,y:705,
+   menu:{ja:["冷麺 400円","スモア 200円","ストラックアウト 100円"],en:["Cold noodles ¥400","S'mores ¥200","Strike-out ¥100"]}},
+  {id:11,name:{ja:"駒寄滝の沢SC",en:"Komayose Takinosawa SC"},short:{ja:"駒滝SC",en:"Takinosawa SC"},cat:"game",icon:"⚽",x:288,y:705,
+   menu:{ja:["キックターゲット 1回100円","光る玩具販売 100〜200円"],en:["Kick target ¥100/try","Glow toys ¥100–200"]}},
 ];
 
 const schedule = [
@@ -1081,7 +1098,10 @@ function showPopup() {
   const s = stalls.find(x => x.id === activeId);
   const bg = catColors[s.cat], tc = catText[s.cat];
   const label = catLabels[lang][s.cat];
-  const rows = `<div class="menu-row"><span class="menu-name">${i18n[lang].menuComingSoon}</span></div>`;
+  const items = s.menu ? s.menu[lang] : null;
+  const rows = (items && items.length)
+    ? items.map(m => `<div class="menu-row"><span class="menu-name">${m}</span></div>`).join("")
+    : `<div class="menu-row"><span class="menu-name">${i18n[lang].menuComingSoon}</span></div>`;
   area.innerHTML = `<div class="popup-card">
     <div class="popup-head">
       <div class="popup-emoji" style="background:${bg}">${s.icon}</div>

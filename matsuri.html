@@ -6,172 +6,167 @@
 <title>こまよせ夏祭り 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
+  /* ===== パンフレット（paper01 / paper02）準拠のカラーパレット ===== */
   :root {
-    --primary: #1E90C9;
-    --primary-dark: #1573A3;
-    --primary-light: #E7F4FB;
-    --sun: #FFC93C;
-    --sun-light: #FFF7E1;
-    --yellow: #FFDE59;
-    --yellow-dark: #C99A00;
-    --cloud: #FFFFFF;
-    --teal: #1AA88B;
-    --teal-light: #E2F7F1;
-    --coral: #FF8166;
-    --coral-light: #FFEDE8;
-    --bg: #F4FAFE;
+    --navy: #213A79;          /* 紙面の地色 */
+    --navy-deep: #1A2F63;
+    --navy-light: #35508F;
+    --navy-ink: #1B2A4A;      /* 白地の上の本文色 */
+    --orange: #EE5600;        /* 見出し帯・フッター */
+    --orange-bright: #FF5C00; /* タイトル文字 */
+    --red: #D01900;           /* スケジュールの演目名 */
+    --pink: #FFC3F3;          /* 吹き出し（丸） */
+    --sky: #BAE3FF;           /* 吹き出し（角丸） */
+
+    /* エリア色（paper02 の A/B/C/D） */
+    --areaA: #FFDBF8;  --areaA-ink: #9B2C86;  --areaA-line: #E9A7DA;
+    --areaB: #BAE3FF;  --areaB-ink: #17568C;  --areaB-line: #86C6EE;
+    --areaC: #BAE0BD;  --areaC-ink: #1D6B3E;  --areaC-line: #8CC793;
+    --areaD: #FFF6BA;  --areaD-ink: #8A6300;  --areaD-line: #E8D479;
+    --hq: #E25A46;
+
     --surface: #FFFFFF;
-    --surface2: #EEF8FD;
-    --border: rgba(30,144,201,0.14);
-    --border2: rgba(30,144,201,0.26);
-    --text: #0E2A38;
-    --text2: #50707F;
-    --text3: #8AA6B2;
-    --radius: 16px;
-    --radius-sm: 10px;
-    --shadow: 0 2px 14px rgba(30,144,201,0.10);
+    --surface2: #F3F6FC;
+    --border: #DEE5F2;
+    --text: #1B2A4A;
+    --text2: #55648A;
+    --text3: #8C99B5;
+    --radius: 18px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 20px rgba(12,25,60,0.18);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Zen Maru Gothic', sans-serif;
-    background: var(--bg);
+    font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--navy);
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.055) 1.4px, transparent 1.4px);
+    background-size: 24px 24px;
     color: var(--text);
     min-height: 100vh;
   }
 
   /* ===== HEADER ===== */
   header {
-    background: linear-gradient(180deg, #2BA3DE 0%, #5FC1EA 55%, #9CDCF2 100%);
+    background: var(--navy);
     padding: 0;
     position: relative;
     overflow: hidden;
   }
 
-  .header-pattern {
+  .firework-deco { position: absolute; z-index: 0; opacity: 0.9; display: block; }
+  .firework-deco > .hanabi-img,
+  .firework-deco > .hanabi-fallback {
     position: absolute; inset: 0;
-    background-image:
-      radial-gradient(circle at 15% 30%, rgba(255,255,255,0.35) 0%, transparent 45%),
-      radial-gradient(circle at 85% 20%, rgba(255,255,255,0.25) 0%, transparent 40%),
-      radial-gradient(circle at 10% 82%, rgba(255,129,184,0.45) 0%, transparent 3%),
-      radial-gradient(circle at 92% 70%, rgba(255,222,89,0.55) 0%, transparent 2.5%),
-      radial-gradient(circle at 30% 92%, rgba(255,255,255,0.5) 0%, transparent 2%),
-      radial-gradient(circle at 68% 88%, rgba(255,129,184,0.4) 0%, transparent 2%),
-      radial-gradient(circle at 50% 78%, rgba(255,222,89,0.4) 0%, transparent 1.8%);
+    width: 100%; height: 100%;
   }
-
-  body {
-    background-image:
-      radial-gradient(circle, rgba(30,144,201,0.06) 1.5px, transparent 1.5px);
-    background-size: 22px 22px;
-  }
-
-  .sun-icon {
-    position: absolute;
-    top: 14px; right: 18px;
-    width: 46px; height: 46px;
-    z-index: 1;
-  }
-
-  .cloud-row {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 16px 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .cloud {
-    opacity: 0.85;
-  }
+  /* WebP画像は読み込みに成功したときだけ表示する。
+     非対応ブラウザ・画像欠損では .webp-ok が付かず、線画SVGが残る */
+  .hanabi-img { display: none; }
+  .firework-deco.webp-ok > .hanabi-img { display: block; }
+  .firework-deco.webp-ok > .hanabi-fallback { display: none; }
+  .lantern-row { position: absolute; top: 0; z-index: 1; }
+  .lantern-left { left: -6px; }
+  .lantern-right { right: -6px; transform: scaleX(-1); }
 
   .header-content {
-    padding: 10px 20px 26px;
+    /* 上の余白は提灯（高さ約58px）を避けるための最小値 */
+    /* 下は .header-note の margin-bottom を増やした分（+8px）だけ減らしてある */
+    padding: 52px 20px 18px;
     text-align: center;
     position: relative;
     z-index: 2;
   }
 
-  .header-date-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255,255,255,0.85);
-    border: 1px solid rgba(255,255,255,0.6);
-    border-radius: 20px;
-    padding: 4px 14px;
-    font-size: 12px;
-    color: var(--primary-dark);
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
   .header-badge {
     font-size: 13px;
     font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.06em;
-    margin-bottom: 2px;
-    text-shadow: 0 1px 4px rgba(20,100,140,0.3);
+    color: var(--orange-bright);
+    letter-spacing: 0.1em;
+    line-height: 1.45;
+    margin-bottom: 3px;
   }
 
   .header-title {
-    font-size: clamp(28px, 7vw, 44px);
-    font-weight: 700;
-    color: var(--yellow);
-    line-height: 1.2;
-    letter-spacing: 0.04em;
-    text-shadow: 0 3px 0 rgba(20,80,110,0.28), 0 2px 12px rgba(20,80,110,0.3);
-    margin-bottom: 2px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(38px, 12vw, 64px);
+    font-weight: 800;
+    color: var(--orange-bright);
+    line-height: 1.05;
+    letter-spacing: 0.1em;
+    text-shadow: 4px 4px 0 rgba(255,255,255,0.28);
+  }
+
+  .header-year {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: clamp(21px, 6.5vw, 34px);
+    font-weight: 800;
+    color: var(--orange-bright);
+    letter-spacing: 0.1em;
+    line-height: 1.1;
   }
 
   .header-script {
     font-family: 'Caveat', cursive;
-    font-size: clamp(20px, 5vw, 26px);
+    font-size: clamp(16px, 4.6vw, 22px);
     font-weight: 700;
     color: #fff;
-    text-shadow: 0 1px 4px rgba(20,100,140,0.35);
+    margin: 2px 0 11px;
+  }
+
+  .header-date {
+    color: #fff;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 800;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px 4px;
     margin-bottom: 6px;
   }
 
-  .header-sub {
-    font-size: 13px;
-    color: rgba(255,255,255,0.95);
-    font-weight: 500;
-    text-shadow: 0 1px 4px rgba(20,100,140,0.3);
-    margin-bottom: 14px;
+  .header-date .d-num { font-size: clamp(25px, 7.4vw, 38px); }
+  .header-date .d-unit { font-size: clamp(14px, 4.1vw, 20px); }
+  .header-date .d-time { font-size: clamp(18px, 5.7vw, 28px); margin-left: 6px; }
+  .header-date .d-dow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.55em; height: 1.55em;
+    font-size: clamp(13px, 3.8vw, 18px);
+    background: #2E7BE0; border-radius: 50%;
+    margin: 0 2px;
   }
 
-  .lantern-row {
-    position: absolute;
-    top: 8px; left: 10px;
-    z-index: 1;
-    opacity: 0.95;
+  .header-place {
+    font-size: clamp(13px, 3.7vw, 17px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 3px;
   }
 
-  .firework-deco {
-    position: absolute;
-    z-index: 0;
-    opacity: 0.5;
-  }
+  /* 言語切替ボタンの上の余白。ここを増やした分は .header-content の
+     padding-bottom を同じだけ減らし、ヘッダー全体の高さは変えない */
+  .header-note { font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
 
   .lang-toggle {
     display: inline-flex;
-    background: rgba(255,255,255,0.3);
-    border: 1px solid rgba(255,255,255,0.5);
-    border-radius: 20px;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
     overflow: hidden;
   }
 
   .lang-btn {
-    padding: 5px 16px;
+    padding: 6px 18px;
     font-size: 12px;
     font-family: inherit;
     font-weight: 700;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.9);
     background: none;
     border: none;
     cursor: pointer;
@@ -179,36 +174,31 @@
     letter-spacing: 0.05em;
   }
 
-  .lang-btn.active {
-    background: #fff;
-    color: var(--primary-dark);
-    border-radius: 18px;
-  }
+  .lang-btn.active { background: #fff; color: var(--navy); border-radius: 999px; }
 
   /* ===== NAV ===== */
   nav {
     display: flex;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    background: var(--navy-deep);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
     overflow-x: auto;
   }
 
   .nav-btn {
     flex: 1;
-    min-width: 70px;
-    padding: 12px 4px;
+    min-width: 76px;
+    padding: 11px 4px 9px;
     font-size: 11.5px;
     font-family: inherit;
     font-weight: 700;
-    color: var(--text3);
+    color: rgba(255,255,255,0.62);
     background: none;
     border: none;
     cursor: pointer;
-    border-bottom: 2.5px solid transparent;
+    border-bottom: 3px solid transparent;
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
@@ -218,64 +208,52 @@
   }
 
   .nav-btn .nav-icon { font-size: 18px; }
-  .nav-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .nav-btn.active { color: #fff; border-bottom-color: var(--orange); }
 
   /* ===== SECTIONS ===== */
-  .section { display: none; padding: 16px; }
+  .section { display: none; padding: 18px 14px 24px; }
   .section.active { display: block; }
 
-  /* ===== CARDS ===== */
+  /* 帯見出し（paper01 の「イベントスケジュール」） */
+  .band-title {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 14px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 8px 26px;
+    border-radius: 999px;
+    text-align: center;
+  }
+
   .section-card {
     background: var(--surface);
     border-radius: var(--radius);
-    border: 1px solid var(--border);
     overflow: hidden;
     margin-bottom: 14px;
-  }
-
-  .card-header {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 18px 6px 6px;
-    margin: 14px 0 10px 14px;
-    background: linear-gradient(135deg, #FFDE59, #FFC93C);
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #6B5300;
-    box-shadow: 0 3px 10px rgba(201,154,0,0.25);
-  }
-
-  .card-header-icon {
-    width: 30px; height: 30px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
+    box-shadow: var(--shadow);
   }
 
   .filter-bar {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    padding: 10px 12px;
+    padding: 12px;
     background: var(--surface2);
     border-bottom: 1px solid var(--border);
   }
 
-  .filter-label {
-    font-size: 11px;
-    color: var(--text3);
-    align-self: center;
-    margin-right: 2px;
-  }
+  .filter-label { font-size: 11px; color: var(--text3); align-self: center; margin-right: 2px; }
 
   .fbtn {
     font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--border2);
+    padding: 5px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
     background: var(--surface);
     color: var(--text2);
     cursor: pointer;
@@ -284,35 +262,73 @@
     font-weight: 700;
   }
 
-  .fbtn.on {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
-  }
+  .fbtn.on { background: var(--navy); border-color: var(--navy); color: #fff; }
 
-  .map-container {
-    background: #EAF7FB;
-    overflow: hidden;
-  }
-
+  .map-container { background: #fff; overflow: hidden; padding: 0 4px 10px; }
   .map-container svg { width: 100%; display: block; }
+  .booth-btn { cursor: pointer; }
 
-  .stall-btn { cursor: pointer; }
-
-  .popup-area { padding: 12px; }
-
+  /* マップ最上部（トイレ・駐輪場の上）の操作ガイド */
   .map-hint {
     text-align: center;
     font-size: 12px;
     color: var(--text3);
-    padding: 10px 0 4px;
+    padding: 12px 12px 2px;
+    line-height: 1.5;
   }
 
-  /* ===== 屋台メニュー モーダル ===== */
+  /* ===== 出店一覧（エリアカード） ===== */
+  .area-card {
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .area-A { background: var(--areaA); }
+  .area-B { background: var(--areaB); }
+  .area-C { background: var(--areaC); }
+  .area-D { background: var(--areaD); }
+
+  .area-list { list-style: none; }
+
+  .area-row {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 8px 6px;
+    border-radius: 10px;
+    transition: background 0.15s;
+  }
+
+  .area-row:hover { background: rgba(255,255,255,0.5); }
+  .area-row.dim { opacity: 0.32; }
+
+  .area-no {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    flex-shrink: 0;
+    padding-top: 1px;
+    min-width: 2.4em;
+  }
+
+  .area-body { flex: 1; min-width: 0; }
+  .area-name { display: block; font-size: 14.5px; font-weight: 700; color: var(--navy-ink); line-height: 1.45; }
+  .area-org { display: block; font-size: 11.5px; color: rgba(27,42,74,0.7); margin-top: 2px; line-height: 1.4; }
+  .area-emoji { font-size: 15px; margin-left: 4px; }
+
+  /* ===== メニュー モーダル ===== */
   .popup-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(14,42,56,0.5);
+    background: rgba(15,25,55,0.66);
     display: none;
     align-items: center;
     justify-content: center;
@@ -320,24 +336,19 @@
     z-index: 200;
   }
 
-  .popup-overlay.open {
-    display: flex;
-    animation: fadeIn 0.15s ease;
-  }
+  .popup-overlay.open { display: flex; animation: fadeIn 0.15s ease; }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   .popup-card {
     background: var(--surface);
-    border: 1px solid var(--border2);
     border-radius: var(--radius);
     padding: 16px;
     width: 100%;
     max-width: 360px;
-    box-shadow: 0 12px 40px rgba(14,42,56,0.28);
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
     animation: popIn 0.2s ease;
   }
 
@@ -346,34 +357,33 @@
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  .popup-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
+  .popup-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 
   .popup-emoji {
-    width: 38px; height: 38px;
-    border-radius: 10px;
+    width: 40px; height: 40px;
+    border-radius: 11px;
     display: flex; align-items: center; justify-content: center;
     font-size: 22px;
     flex-shrink: 0;
   }
 
-  .popup-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
+  .popup-code {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 11px; font-weight: 800;
+    color: var(--navy);
+    letter-spacing: 0.04em;
   }
+
+  .popup-name { font-size: 15.5px; font-weight: 700; color: var(--text); line-height: 1.35; }
+  .popup-org { font-size: 11.5px; color: var(--text2); margin-top: 1px; }
 
   .cat-pill {
     display: inline-block;
     font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 20px;
+    padding: 2px 9px;
+    border-radius: 999px;
     font-weight: 700;
-    margin-top: 2px;
+    margin-top: 4px;
   }
 
   .popup-close {
@@ -383,356 +393,337 @@
     border: 1px solid var(--border);
     background: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
     display: flex; align-items: center; justify-content: center;
     color: var(--text3);
     flex-shrink: 0;
+    align-self: flex-start;
   }
 
   .popup-close:hover { background: var(--surface2); }
-
   .menu-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
   .menu-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 7px 0;
-    font-size: 13px;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 13.5px;
     border-bottom: 1px solid var(--border);
   }
 
   .menu-row:last-child { border-bottom: none; }
-  .menu-name { color: var(--text); }
-  .menu-price { color: var(--primary-dark); font-weight: 700; }
+  .menu-name { color: var(--text); line-height: 1.5; }
+  .menu-price { color: var(--orange); font-weight: 700; white-space: nowrap; }
 
-  /* ===== SCHEDULE SECTION ===== */
-  .timeline { padding: 14px; }
+  /* ===== SCHEDULE ===== */
+  .timeline { padding: 16px 12px 6px; }
 
-  .tl-row {
-    display: flex;
-    gap: 10px;
-    position: relative;
-  }
+  .tl-row { display: flex; gap: 8px; position: relative; }
 
   .tl-time {
-    width: 44px;
+    width: 56px;
     flex-shrink: 0;
-    font-size: 12px;
-    color: var(--text3);
-    padding-top: 7px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--navy);
+    padding-top: 5px;
     text-align: right;
-    font-weight: 700;
   }
 
-  .tl-axis {
-    width: 20px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  .tl-axis { width: 22px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
 
+  /* 紙面の八角星のドット */
   .tl-dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
+    position: relative;
+    width: 15px; height: 15px;
     flex-shrink: 0;
-    margin-top: 9px;
-    border: 2.5px solid;
-    transition: all 0.2s;
+    margin-top: 8px;
   }
+  .tl-dot::before, .tl-dot::after {
+    content: ""; position: absolute; inset: 0;
+    background: var(--navy); border-radius: 3px;
+  }
+  .tl-dot::after { transform: rotate(45deg); }
+  .tl-dot.now::before, .tl-dot.now::after { background: var(--orange); }
+  .tl-dot.next::before, .tl-dot.next::after { background: var(--red); }
 
-  .tl-line {
-    width: 2px;
-    flex: 1;
-    background: var(--border2);
-    min-height: 12px;
-  }
+  .tl-line { width: 2.5px; flex: 1; background: var(--navy); min-height: 14px; }
 
-  .tl-card {
-    flex: 1;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 8px 12px;
-    margin-bottom: 10px;
-  }
-
-  .tl-card.now {
-    border-color: var(--primary);
-    background: var(--primary-light);
-  }
-
-  .tl-card.transition {
-    background: var(--surface2);
-    padding: 6px 12px;
-    margin-bottom: 8px;
-  }
-
-  .tl-card.transition .tl-title {
-    font-size: 12px;
-    color: var(--text3);
-    font-weight: 500;
-  }
+  .tl-body { flex: 1; padding: 0 2px 18px; }
 
   .tl-title {
-    font-size: 14px;
+    font-size: 15.5px;
     font-weight: 700;
-    color: var(--text);
+    color: var(--red);
+    line-height: 1.4;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+  }
+
+  .tl-desc { font-size: 12.5px; color: var(--navy-ink); margin-top: 3px; line-height: 1.6; }
+
+  .tl-acts { list-style: none; }
+  .tl-act { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; padding: 2px 0; }
+  .tl-act-name { font-size: 15px; font-weight: 700; color: var(--red); line-height: 1.45; }
+  .tl-act-org { font-size: 12.5px; color: var(--navy-ink); }
+
+  .badge { font-size: 10px; padding: 2px 9px; border-radius: 999px; font-weight: 700; white-space: nowrap; }
+  .badge-now { background: var(--orange); color: #fff; }
+  .badge-next { background: var(--areaD); color: #8A6300; }
+
+  /* 紙面の水色吹き出し */
+  .bubble {
+    display: inline-block;
+    background: var(--sky);
+    color: var(--navy-ink);
+    font-size: 11.5px;
+    line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 14px;
+    margin-top: 9px;
+    position: relative;
+  }
+  .bubble strong { font-size: 13.5px; }
+  /* しっぽは上向き。すぐ上の演目（こどもみこし）から出ているように見せる */
+  .bubble::after {
+    content: ""; position: absolute; left: 20px; top: -7px;
+    border: 7px solid transparent; border-bottom-color: var(--sky); border-top: 0;
+  }
+
+  /* 吹き出しの右横にアイコンを並べる。
+     .bubble は flex:0 0 auto で本来の幅のまま（縮まない・広がらない） */
+  .bubble-wrap {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
+    margin-top: 9px;
+  }
+  .bubble-wrap .bubble { flex: 0 0 auto; margin-top: 0; }
+  .bubble-icon {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    object-fit: contain;
   }
 
-  .tl-desc {
-    font-size: 12px;
-    color: var(--text2);
-    margin-top: 3px;
-    line-height: 1.5;
-  }
-
-  .badge {
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  .badge-now { background: var(--primary); color: #fff; }
-  .badge-next { background: var(--sun-light); color: #8A6400; }
-
-  /* ===== INFO SECTION ===== */
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-
-  .info-card {
+  /* ===== INFO ===== */
+  .info-note {
     background: var(--surface);
-    border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 12px;
-    text-align: center;
-  }
-
-  .info-card-icon { font-size: 28px; margin-bottom: 6px; }
-  .info-card-label { font-size: 11px; color: var(--text3); margin-bottom: 3px; }
-  .info-card-value { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.4; }
-
-  .notice-card {
-    background: var(--sun-light);
-    border: 1px solid rgba(255,201,60,0.4);
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
+    padding: 13px 15px;
     margin-bottom: 10px;
     display: flex;
-    gap: 10px;
+    gap: 11px;
     align-items: flex-start;
+    box-shadow: var(--shadow);
   }
 
-  .notice-icon { font-size: 18px; flex-shrink: 0; }
-  .notice-text { font-size: 13px; color: var(--text); line-height: 1.6; }
-  .notice-title { font-weight: 700; margin-bottom: 2px; }
+  .notice-icon { font-size: 19px; flex-shrink: 0; }
+  .notice-text { font-size: 13px; color: var(--text); line-height: 1.65; }
+  .notice-title { font-weight: 700; margin-bottom: 2px; color: var(--navy); }
 
-  .request-list {
-    list-style: none;
-    padding: 4px 14px 14px;
+  /* 駐輪・トイレは正方形カードにして他の案内と差別化する */
+  .info-square-grid {
+    display: grid;
+    /* minmax(0,1fr) にしないとトラックが min-content 幅まで広がり、
+       他の横長カードより横にはみ出してしまう */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
   }
+
+  .info-note.square {
+    aspect-ratio: 1 / 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
+    padding: 14px 12px;
+    margin-bottom: 0;
+  }
+
+  .info-note.square .notice-icon { font-size: 26px; line-height: 1; }
+  .info-note.square .notice-text { font-size: 11px; line-height: 1.5; }
+  .info-note.square .notice-title { font-size: 13px; margin-bottom: 3px; }
+  /* 本文量の差で高さがずれないよう、行の高さいっぱいに揃える */
+  .info-note.square { height: 100%; }
+
+  .request-list { list-style: none; padding: 4px 16px 16px; }
 
   .request-list li {
     display: flex;
-    gap: 8px;
+    gap: 9px;
     align-items: flex-start;
     font-size: 13px;
     color: var(--text2);
-    line-height: 1.6;
-    padding: 7px 0;
+    line-height: 1.65;
+    padding: 8px 0;
     border-bottom: 1px solid var(--border);
   }
 
   .request-list li:last-child { border-bottom: none; }
+  .request-arrow { color: var(--orange); flex-shrink: 0; font-weight: 700; }
 
-  .request-arrow { color: var(--primary); flex-shrink: 0; font-weight: 700; }
-
-  /* ===== SPONSORS SECTION ===== */
-  .sponsor-intro {
-    font-size: 13px;
-    color: var(--text2);
-    padding: 14px 14px 4px;
-    line-height: 1.6;
-  }
-
-  .sponsor-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+  .card-header {
+    display: inline-flex;
+    align-items: center;
     gap: 8px;
-    padding: 14px;
+    margin: 14px 0 6px 14px;
+    background: var(--orange);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
   }
+
+  /* ===== SPONSORS ===== */
+  .sponsor-intro { font-size: 13px; color: var(--text2); padding: 16px 16px 2px; line-height: 1.7; }
+
+  /* バナーのリンクについての補足。本文より一段弱く見せる */
+  .sponsor-tip {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  .sponsor-grid { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 14px; }
 
   .sponsor-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 12px 14px;
-    text-align: left;
+    padding: 11px 14px;
     text-decoration: none;
     color: var(--text);
     transition: all 0.18s;
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 12px;
-  }
-
-  .sponsor-card:hover {
-    border-color: var(--primary);
-    box-shadow: var(--shadow);
-    transform: translateY(-2px);
-  }
-
-  .sponsor-logo {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    background: var(--surface2);
-    flex-shrink: 0;
-  }
-
-  .sponsor-name {
-    font-size: 13.5px;
-    font-weight: 700;
-    line-height: 1.3;
-    flex: 1;
-  }
-
-  .sponsor-link-icon {
-    font-size: 11px;
-    color: var(--primary);
-  }
-
-  /* 画像バナー（webp配置時） */
-  .sponsor-card.has-img {
-    padding: 0;
     overflow: hidden;
   }
 
-  .sponsor-banner {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
+  a.sponsor-card { position: relative; }
+  a.sponsor-card:hover { border-color: var(--orange); box-shadow: 0 4px 12px rgba(238,86,0,0.18); }
+
+  /* リンクありのバナーだけ、右上に外部リンクの目印を出す */
+  a.sponsor-card::after {
+    content: "↗";
+    position: absolute; top: 5px; right: 6px;
+    font-size: 10.5px; font-weight: 700; line-height: 1.5;
+    color: var(--text3);
+    background: rgba(255,255,255,0.85);
+    border-radius: 5px;
+    padding: 0 4px;
+    pointer-events: none;
+  }
+  a.sponsor-card:hover::after { color: var(--orange); }
+
+  .sponsor-card.has-img { padding: 0; border-color: var(--border); }
+  .sponsor-banner { width: 100%; height: auto; display: block; object-fit: contain; }
+  .sponsor-name { font-size: 13.5px; font-weight: 700; line-height: 1.4; flex: 1; }
+  .sponsor-no {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 11px; font-weight: 800; color: var(--text3); flex-shrink: 0; min-width: 1.6em;
   }
 
   /* ===== FOOTER ===== */
   footer {
-    text-align: center;
-    padding: 18px 16px;
+    padding: 20px 16px 26px;
     font-size: 12px;
-    color: #6B5300;
-    background: var(--yellow);
-    margin-top: 8px;
+    color: #fff;
+    background: var(--orange);
+    line-height: 1.8;
   }
 
-  footer .footer-org {
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
+  .footer-inner { max-width: 640px; margin: 0 auto; }
+  .footer-row { display: flex; gap: 8px; align-items: flex-start; }
+  .footer-key { font-weight: 700; flex-shrink: 0; }
+  .footer-sub { color: rgba(255,255,255,0.9); }
 
   footer .footer-insta {
     display: inline-block;
-    margin-top: 8px;
-    color: #6B5300;
+    margin-top: 10px;
+    color: #fff;
     font-weight: 700;
     text-decoration: none;
-    border-bottom: 1px solid #6B5300;
+    border-bottom: 1px solid rgba(255,255,255,0.7);
   }
 
-  footer .footer-copy {
-    margin-top: 10px;
-    font-size: 10.5px;
-    color: #8A7000;
-  }
+  footer .footer-copy { margin-top: 12px; font-size: 10.5px; color: rgba(255,255,255,0.85); }
 
   /* ===== RESPONSIVE ===== */
   @media (min-width: 640px) {
-    .section { max-width: 640px; margin: 0 auto; }
-    nav { max-width: 640px; margin: 0 auto; }
-    .header-title { font-size: 40px; }
+    .section, nav, .header-content { max-width: 640px; margin-left: auto; margin-right: auto; }
+    .area-list { columns: 2; column-gap: 14px; }
+    .area-row { break-inside: avoid; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-pattern"></div>
-  <svg class="firework-deco" style="top:60px; left:-10px" width="90" height="90" viewBox="0 0 100 100">
-    <g stroke="#fff" stroke-width="2.5" stroke-linecap="round">
-      <line x1="50" y1="10" x2="50" y2="35"/><line x1="50" y1="90" x2="50" y2="65"/>
-      <line x1="10" y1="50" x2="35" y2="50"/><line x1="90" y1="50" x2="65" y2="50"/>
-      <line x1="20" y1="20" x2="38" y2="38"/><line x1="80" y1="80" x2="62" y2="62"/>
-      <line x1="80" y1="20" x2="62" y2="38"/><line x1="20" y1="80" x2="38" y2="62"/>
-    </g>
+  <!-- 花火（paper01）
+       WebP画像を優先し、読み込めた場合だけ表示する。
+       WebP非対応・画像欠損のときは中の線画SVGがそのまま残る -->
+  <span class="firework-deco" style="top:34px; left:-24px; width:150px; height:150px" aria-hidden="true">
+    <img class="hanabi-img" src="img/icon/hanabi-512.webp" alt="">
+    <svg class="hanabi-fallback" viewBox="0 0 100 100">
+      <g stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.85">
+        <line x1="50" y1="50" x2="50" y2="6"/><line x1="50" y1="50" x2="50" y2="94"/>
+        <line x1="50" y1="50" x2="6" y2="50"/><line x1="50" y1="50" x2="94" y2="50"/>
+        <line x1="50" y1="50" x2="19" y2="19"/><line x1="50" y1="50" x2="81" y2="81"/>
+        <line x1="50" y1="50" x2="81" y2="19"/><line x1="50" y1="50" x2="19" y2="81"/>
+        <line x1="50" y1="50" x2="33" y2="9"/><line x1="50" y1="50" x2="67" y2="91"/>
+        <line x1="50" y1="50" x2="9" y2="33"/><line x1="50" y1="50" x2="91" y2="67"/>
+        <line x1="50" y1="50" x2="67" y2="9"/><line x1="50" y1="50" x2="33" y2="91"/>
+        <line x1="50" y1="50" x2="9" y2="67"/><line x1="50" y1="50" x2="91" y2="33"/>
+      </g>
+      <circle cx="50" cy="50" r="4" fill="#fff"/>
+    </svg>
+  </span>
+  <span class="firework-deco" style="top:6px; right:-18px; width:120px; height:120px; opacity:0.72" aria-hidden="true">
+    <img class="hanabi-img" src="img/icon/hanabi-512.webp" alt="">
+    <svg class="hanabi-fallback" viewBox="0 0 100 100">
+      <g stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.7">
+        <line x1="50" y1="50" x2="50" y2="8"/><line x1="50" y1="50" x2="50" y2="92"/>
+        <line x1="50" y1="50" x2="8" y2="50"/><line x1="50" y1="50" x2="92" y2="50"/>
+        <line x1="50" y1="50" x2="20" y2="20"/><line x1="50" y1="50" x2="80" y2="80"/>
+        <line x1="50" y1="50" x2="80" y2="20"/><line x1="50" y1="50" x2="20" y2="80"/>
+        <line x1="50" y1="50" x2="34" y2="11"/><line x1="50" y1="50" x2="66" y2="89"/>
+        <line x1="50" y1="50" x2="11" y2="34"/><line x1="50" y1="50" x2="89" y2="66"/>
+      </g>
+      <circle cx="50" cy="50" r="3.5" fill="#fff"/>
+    </svg>
+  </span>
+
+  <!-- 提灯（paper01） -->
+  <svg class="lantern-row lantern-left" width="190" height="80" viewBox="0 0 190 80" aria-hidden="true">
+    <path d="M0 6 L34 26 L74 10 L112 30 L150 12" fill="none" stroke="#F0F3FA" stroke-width="1.6"/>
+    <g><ellipse cx="18" cy="36" rx="15" ry="18" fill="#E8483A"/><ellipse cx="18" cy="36" rx="6.5" ry="16" fill="#fff"/><rect x="14" y="17" width="8" height="4.5" rx="1" fill="#141B33"/><rect x="14" y="51" width="8" height="4.5" rx="1" fill="#141B33"/></g>
+    <g><ellipse cx="56" cy="26" rx="14" ry="17" fill="#E8483A"/><ellipse cx="56" cy="26" rx="6" ry="15" fill="#fff"/><rect x="52" y="8" width="8" height="4.5" rx="1" fill="#141B33"/><rect x="52" y="40" width="8" height="4.5" rx="1" fill="#141B33"/></g>
+    <g><ellipse cx="94" cy="40" rx="14" ry="17" fill="#E8483A"/><ellipse cx="94" cy="40" rx="6" ry="15" fill="#fff"/><rect x="90" y="22" width="8" height="4.5" rx="1" fill="#141B33"/><rect x="90" y="54" width="8" height="4.5" rx="1" fill="#141B33"/></g>
+    <g><ellipse cx="132" cy="26" rx="13" ry="16" fill="#E8483A"/><ellipse cx="132" cy="26" rx="5.5" ry="14" fill="#fff"/><rect x="128" y="9" width="8" height="4.5" rx="1" fill="#141B33"/><rect x="128" y="39" width="8" height="4.5" rx="1" fill="#141B33"/></g>
   </svg>
-  <svg class="firework-deco" style="top:10px; right:70px" width="60" height="60" viewBox="0 0 100 100">
-    <g stroke="#FFDE59" stroke-width="3" stroke-linecap="round">
-      <line x1="50" y1="15" x2="50" y2="35"/><line x1="50" y1="85" x2="50" y2="65"/>
-      <line x1="15" y1="50" x2="35" y2="50"/><line x1="85" y1="50" x2="65" y2="50"/>
-      <line x1="25" y1="25" x2="38" y2="38"/><line x1="75" y1="75" x2="62" y2="62"/>
-      <line x1="75" y1="25" x2="62" y2="38"/><line x1="25" y1="75" x2="38" y2="62"/>
-    </g>
+  <svg class="lantern-row lantern-right" width="190" height="80" viewBox="0 0 190 80" aria-hidden="true">
+    <path d="M0 6 L34 26 L74 10 L112 30 L150 12" fill="none" stroke="#F0F3FA" stroke-width="1.6"/>
+    <g><ellipse cx="18" cy="36" rx="15" ry="18" fill="#E8483A"/><ellipse cx="18" cy="36" rx="6.5" ry="16" fill="#fff"/><rect x="14" y="17" width="8" height="4.5" rx="1" fill="#141B33"/><rect x="14" y="51" width="8" height="4.5" rx="1" fill="#141B33"/></g>
+    <g><ellipse cx="56" cy="26" rx="14" ry="17" fill="#E8483A"/><ellipse cx="56" cy="26" rx="6" ry="15" fill="#fff"/><rect x="52" y="8" width="8" height="4.5" rx="1" fill="#141B33"/><rect x="52" y="40" width="8" height="4.5" rx="1" fill="#141B33"/></g>
+    <g><ellipse cx="94" cy="40" rx="14" ry="17" fill="#E8483A"/><ellipse cx="94" cy="40" rx="6" ry="15" fill="#fff"/><rect x="90" y="22" width="8" height="4.5" rx="1" fill="#141B33"/><rect x="90" y="54" width="8" height="4.5" rx="1" fill="#141B33"/></g>
+    <g><ellipse cx="132" cy="26" rx="13" ry="16" fill="#E8483A"/><ellipse cx="132" cy="26" rx="5.5" ry="14" fill="#fff"/><rect x="128" y="9" width="8" height="4.5" rx="1" fill="#141B33"/><rect x="128" y="39" width="8" height="4.5" rx="1" fill="#141B33"/></g>
   </svg>
-  <svg class="sun-icon" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="22" fill="#FFC93C"/>
-    <g stroke="#FFC93C" stroke-width="5" stroke-linecap="round">
-      <line x1="50" y1="8" x2="50" y2="20"/>
-      <line x1="50" y1="80" x2="50" y2="92"/>
-      <line x1="8" y1="50" x2="20" y2="50"/>
-      <line x1="80" y1="50" x2="92" y2="50"/>
-      <line x1="20" y1="20" x2="28" y2="28"/>
-      <line x1="72" y1="72" x2="80" y2="80"/>
-      <line x1="80" y1="20" x2="72" y2="28"/>
-      <line x1="28" y1="72" x2="20" y2="80"/>
-    </g>
-  </svg>
-  <svg class="lantern-row" width="150" height="60" viewBox="0 0 150 60">
-    <path d="M4 4 L40 22 L78 8 L112 24" fill="none" stroke="#3a2a1a" stroke-width="1.5"/>
-    <g>
-      <ellipse cx="40" cy="34" rx="15" ry="18" fill="#E8483A" stroke="#7a1f16" stroke-width="1"/>
-      <ellipse cx="40" cy="34" rx="7" ry="16" fill="#fff" opacity="0.9"/>
-      <rect x="36" y="16" width="8" height="4" fill="#3a2a1a"/>
-      <rect x="36" y="50" width="8" height="4" fill="#3a2a1a"/>
-    </g>
-    <g>
-      <ellipse cx="80" cy="26" rx="13" ry="16" fill="#E8483A" stroke="#7a1f16" stroke-width="1"/>
-      <ellipse cx="80" cy="26" rx="6" ry="14" fill="#fff" opacity="0.9"/>
-      <rect x="76.5" y="10" width="7" height="4" fill="#3a2a1a"/>
-      <rect x="76.5" y="40" width="7" height="4" fill="#3a2a1a"/>
-    </g>
-    <g>
-      <ellipse cx="112" cy="36" rx="14" ry="17" fill="#E8483A" stroke="#7a1f16" stroke-width="1"/>
-      <ellipse cx="112" cy="36" rx="6.5" ry="15" fill="#fff" opacity="0.9"/>
-      <rect x="108" y="19" width="8" height="4" fill="#3a2a1a"/>
-      <rect x="108" y="51" width="8" height="4" fill="#3a2a1a"/>
-    </g>
-  </svg>
-  <div class="cloud-row">
-    <svg class="cloud" width="64" height="28" viewBox="0 0 64 28"><ellipse cx="18" cy="18" rx="16" ry="10" fill="#fff"/><ellipse cx="34" cy="13" rx="14" ry="12" fill="#fff"/><ellipse cx="48" cy="19" rx="13" ry="9" fill="#fff"/></svg>
-    <svg class="cloud" width="46" height="20" viewBox="0 0 46 20" style="margin-top:8px"><ellipse cx="13" cy="13" rx="11" ry="7" fill="#fff"/><ellipse cx="25" cy="9" rx="10" ry="9" fill="#fff"/><ellipse cx="35" cy="13" rx="9" ry="6" fill="#fff"/></svg>
-  </div>
+
   <div class="header-content">
-    <div class="header-date-badge">
-      <span>🗓</span>
-      <span id="headerDate">2026年8月22日（土）</span>
-    </div>
-    <div class="header-badge" id="headerBadge">第42回 駒寄地区</div>
-    <div class="header-title" id="headerTitle">夏祭り 2026</div>
+    <div class="header-badge" id="headerBadge">第42回<br>駒寄地区</div>
+    <div class="header-title" id="headerTitle">夏祭り</div>
+    <div class="header-year">2026</div>
     <div class="header-script" id="headerScript">Komayose Summer Festival</div>
-    <div class="header-sub" id="headerSub">駒寄小学校グラウンド / 16:00〜20:00</div>
+    <div class="header-date" id="headerDate"><span class="d-num">8</span><span class="d-unit">月</span><span class="d-num">22</span><span class="d-unit">日</span><span class="d-dow">土</span><span class="d-time">16:00〜20:00</span></div>
+    <div class="header-place" id="headerPlace">駒寄小学校グラウンド</div>
+    <div class="header-note" id="headerNote">※雨天の場合は中止します</div>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
       <button class="lang-btn" onclick="setLang('en')">English</button>
@@ -761,54 +752,48 @@
 
 <!-- MAP SECTION -->
 <div class="section active" id="sec-map">
+  <div class="band-title" id="mapTitle">出店一覧・会場マップ</div>
+
   <div class="section-card">
     <div class="filter-bar">
       <span class="filter-label" id="filterLabel">絞り込み:</span>
       <button class="fbtn on" data-cat="all" id="fbAll">すべて</button>
       <button class="fbtn" data-cat="food" id="fbFood">食べ物・飲み物</button>
-      <button class="fbtn" data-cat="game" id="fbGame">ゲーム</button>
+      <button class="fbtn" data-cat="game" id="fbGame">あそび</button>
       <button class="fbtn" data-cat="other" id="fbOther">その他</button>
     </div>
+    <div class="map-hint" id="mapHint">マップの番号または下の一覧をタップするとメニューが見られます</div>
     <div class="map-container">
-      <svg id="mapSvg" viewBox="0 0 460 800" xmlns="http://www.w3.org/2000/svg">
-        <rect width="460" height="800" fill="#EAF7FB"/>
-        <!-- 会場エリア -->
-        <rect x="15" y="55" width="388" height="690" rx="20" fill="#F4FBFE" stroke="#9CD4E8" stroke-width="1.5" stroke-dasharray="7,5"/>
-        <!-- やぐら（中央） -->
-        <rect x="140" y="368" width="120" height="84" rx="8" fill="#FFF3D0" stroke="#E8483A" stroke-width="2"/>
-        <text x="200" y="416" text-anchor="middle" font-size="17" fill="#B23A2E" font-family="sans-serif" font-weight="bold">やぐら</text>
-        <!-- 本部テント -->
-        <rect x="322" y="431" width="60" height="42" rx="6" fill="#FFFFFF" stroke="#1E90C9" stroke-width="1.2"/>
-        <text x="352" y="456" text-anchor="middle" font-size="10" fill="#1573A3" font-family="sans-serif">本部テント</text>
-        <!-- ゴミの場所 -->
-        <ellipse cx="352" cy="530" rx="44" ry="22" fill="#EFEFEF" stroke="#B0B8BD" stroke-width="1.2"/>
-        <text x="352" y="534" text-anchor="middle" font-size="10" fill="#6B7A82" font-family="sans-serif">ゴミの場所</text>
-        <!-- 汽車（遊具） -->
-        <rect x="324" y="584" width="56" height="96" rx="6" fill="#E7EEF2" stroke="#8AA6B2" stroke-width="1.2"/>
-        <text x="352" y="637" text-anchor="middle" font-size="12" fill="#50707F" font-family="sans-serif">汽車</text>
-        <!-- 校舎（会場外・右） -->
-        <rect x="408" y="340" width="44" height="120" rx="6" fill="#F0F0F0" stroke="#9AA6AC" stroke-width="1.2"/>
-        <text x="430" y="404" text-anchor="middle" font-size="13" fill="#5A6A72" font-family="sans-serif" font-weight="bold">校舎</text>
-        <!-- 南口（上）・北口（下） -->
-        <text x="430" y="95" text-anchor="middle" font-size="12" fill="#1573A3" font-family="sans-serif" font-weight="bold">南口</text>
-        <text x="430" y="715" text-anchor="middle" font-size="12" fill="#1573A3" font-family="sans-serif" font-weight="bold">北口</text>
-        <!-- 屋台 -->
-        <g id="stallLayer"></g>
+      <!-- 上端は枠外に置くトイレ・駐輪場（y=20〜52）のすぐ上 6 で切り、操作ガイドとの行間を詰める。
+           下端は外枠(y=870)の少し下 886 で切り、余白が空きすぎないようにしている -->
+      <svg id="mapSvg" viewBox="0 6 440 880" xmlns="http://www.w3.org/2000/svg" role="img">
+        <!-- グラウンド外枠 -->
+        <rect x="40" y="58" width="364" height="812" rx="10" fill="#FFFFFF" stroke="#1B2A4A" stroke-width="3"/>
+        <!-- スタンド・校舎（右端の斜線帯） -->
+        <defs>
+          <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect width="7" height="7" fill="#F2F4F8"/>
+            <line x1="0" y1="0" x2="0" y2="7" stroke="#DDE2EC" stroke-width="3"/>
+          </pattern>
+        </defs>
+        <rect x="368" y="270" width="34" height="392" fill="url(#hatch)"/>
+        <g id="facilityLayer"></g>
+        <g id="boothLayer"></g>
       </svg>
     </div>
-    <div class="popup-area">
-      <div class="map-hint" id="mapHint">屋台アイコンをタップするとメニューが表示されます</div>
-    </div>
   </div>
+
+  <div id="areaCards"></div>
 </div>
 
-<!-- 屋台メニュー ポップアップ（モーダル） -->
+<!-- メニュー ポップアップ（モーダル） -->
 <div class="popup-overlay" id="popupOverlay" onclick="if(event.target===this)closePopup()">
   <div id="popupArea"></div>
 </div>
 
 <!-- SCHEDULE SECTION -->
 <div class="section" id="sec-schedule">
+  <div class="band-title" id="schedTitle">イベントスケジュール</div>
   <div class="section-card">
     <div class="timeline" id="timeline"></div>
   </div>
@@ -816,220 +801,438 @@
 
 <!-- SPONSORS SECTION -->
 <div class="section" id="sec-sponsors">
+  <div class="band-title" id="sponsorTitle">ご協賛いただいた皆さま</div>
   <div class="section-card">
-    <div class="sponsor-intro" id="sponsorIntro">こまよせ夏祭りは、以下の企業様のご協賛により開催されています。</div>
+    <div class="sponsor-intro" id="sponsorIntro">こまよせ夏祭りは、以下の皆さまのご協賛により開催されています。<br><span class="sponsor-tip">↗マークのついたバナーをタップすると、各社のウェブサイトをご覧いただけます。</span></div>
     <div class="sponsor-grid" id="sponsorGrid"></div>
   </div>
 </div>
 
 <!-- INFO SECTION -->
 <div class="section" id="sec-info">
-  <div class="notice-card">
+  <div class="band-title" id="infoTitle">インフォメーション</div>
+
+  <!-- 駐輪・トイレは特に案内したい項目なので、正方形カード2枚で他と差別化する -->
+  <div class="info-square-grid">
+    <div class="info-note square">
+      <div class="notice-icon">🚲</div>
+      <div class="notice-text">
+        <div class="notice-title" id="noticeTitleBike">駐輪について</div>
+        <span id="noticeBodyBike">自転車は「おおばまるやま公園」に駐輪をお願いします。グラウンドへの自転車・バイクの乗り入れはできません。</span>
+      </div>
+    </div>
+    <div class="info-note square">
+      <div class="notice-icon">🚻</div>
+      <div class="notice-text">
+        <div class="notice-title" id="noticeTitleWc">トイレ</div>
+        <span id="noticeBodyWc">グラウンド北側（スタンド・校舎側）と、南西角の「市民の家」の2か所です。</span>
+      </div>
+    </div>
+  </div>
+  <div class="info-note">
     <div class="notice-icon">☔</div>
     <div class="notice-text">
       <div class="notice-title" id="noticeTitleRain">雨天時について</div>
       <span id="noticeBodyRain">※雨天の場合は中止します。</span>
     </div>
   </div>
-  <div class="notice-card">
-    <div class="notice-icon">🚭</div>
+  <div class="info-note">
+    <div class="notice-icon">🎟</div>
     <div class="notice-text">
-      <div class="notice-title" id="noticeTitle2">禁煙・ゴミのお持ち帰りについて</div>
-      <span id="noticeBody2">会場内は全面禁煙です。ゴミは各自お持ち帰りいただくか、所定のゴミ箱をご利用ください。</span>
+      <div class="notice-title" id="noticeTitleHq">本部・抽選箱</div>
+      <span id="noticeBodyHq">グラウンド北東側の本部テントに抽選箱があります。19:30〜「こまよせ大抽選会」を行います。</span>
     </div>
   </div>
-  <div class="notice-card">
+  <div class="info-note">
+    <div class="notice-icon">🚭</div>
+    <div class="notice-text">
+      <div class="notice-title" id="noticeTitle2">禁煙・ゴミについて</div>
+      <span id="noticeBody2">学校周辺は全面禁煙です。ゴミは分別のうえ所定のゴミ箱をご利用いただくか、お持ち帰りください。</span>
+    </div>
+  </div>
+  <div class="info-note">
     <div class="notice-icon">👶</div>
     <div class="notice-text">
       <div class="notice-title" id="noticeTitle3">迷子・救護について</div>
-      <span id="noticeBody3">迷子や体調不良の際はインフォメーションテントまでお越しください。スタッフが対応いたします。</span>
+      <span id="noticeBody3">迷子や体調不良の際は本部テントまでお越しください。スタッフが対応いたします。</span>
     </div>
   </div>
 
   <div class="section-card">
-    <div class="card-header">
-      <div class="card-header-icon">🙏</div>
-      <span id="requestTitle">お願い</span>
-    </div>
+    <div class="card-header"><span id="requestTitle">お願い</span></div>
     <ul class="request-list" id="requestList"></ul>
   </div>
 </div>
 
 <footer>
-  <div class="footer-org"><span id="footerOrganizerLabel">主催</span>：<span id="footerOrganizer">駒寄地区自治会連合会</span></div>
-  <div class="footer-org"><span id="footerOperatorLabel">運営</span>：<span id="footerOperator">駒寄地区夏祭り実行委員会</span></div>
-  <a class="footer-insta" href="https://www.instagram.com/koma.natsu1984/" target="_blank" rel="noopener">
-    <span id="footerInstaLabel">公式Instagram</span>：@KOMA.NATSU1984
-  </a>
-  <div class="footer-copy">© 2026 <span id="footerCopyName">駒寄地区夏祭り実行委員会</span></div>
+  <div class="footer-inner">
+    <div class="footer-row">
+      <span class="footer-key">【<span id="footerOrganizerLabel">主催</span>】</span>
+      <span>
+        <span id="footerOrganizer">駒寄地区自治会連合会</span><br>
+        <span class="footer-sub" id="footerOrganizerSub">第一駒寄／第二駒寄／五反田／シャルマンコーポ／ダイヤパレスⅡ／MINASIA</span>
+      </span>
+    </div>
+    <div class="footer-row">
+      <span class="footer-key">【<span id="footerSupportLabel">協力</span>】</span>
+      <span id="footerSupport">駒寄小学校／駒寄地区社会体育振興協議会／藤沢市保健医療センター</span>
+    </div>
+    <div class="footer-row">
+      <span class="footer-key">【<span id="footerOperatorLabel">運営</span>】</span>
+      <span id="footerOperator">駒寄地区夏祭り実行委員会</span>
+    </div>
+    <a class="footer-insta" href="https://www.instagram.com/koma.natsu1984/" target="_blank" rel="noopener">
+      <span id="footerInstaLabel">公式Instagram</span>：@KOMA.NATSU1984
+    </a>
+    <div class="footer-copy">© 2026 <span id="footerCopyName">駒寄地区夏祭り実行委員会</span></div>
+  </div>
 </footer>
 
 <script>
-// ===== DATA =====
-// 配置は src/booth-0714_3.jpg の会場図を90度回転（南口が上）。short=マップ上の短縮ラベル、name=ポップアップの正式名称。
-// menu: src/団体提出書類・メニュー確認リスト.xlsx の「メニュー・出店内容」より。実行委員ブース(id18-21)は台帳に団体行がないため未設定（確認待ち）。
-const stalls = [
-  // 上段（旧右列）左→右
-  {id:12,name:{ja:"多摩大学",en:"Tama University"},short:{ja:"多摩大",en:"Tama Univ."},cat:"other",icon:"🎓",x:56,y:92,
-   menu:{ja:["イカ焼き"],en:["Grilled squid"]}},
-  {id:13,name:{ja:"光洋建設（藤沢南ロータリークラブ）",en:"Koyo Construction (Fujisawa Minami Rotary Club)"},short:{ja:"ロータリー",en:"Rotary"},cat:"food",icon:"🌭",x:118,y:92,
-   menu:{ja:["ホットドッグ","アイス","お菓子","ゲーム"],en:["Hot dog","Ice cream","Snacks","Games"]}},
-  {id:14,name:{ja:"光友会",en:"Koyu-kai"},short:{ja:"光友会",en:"Koyu-kai"},cat:"food",icon:"🍗",x:180,y:92,
-   menu:{ja:["焼きそば","唐揚げ","パン"],en:["Yakisoba","Fried chicken","Bread"]}},
-  {id:15,name:{ja:"マイミライnext",en:"My Mirai next"},short:{ja:"マイミライ",en:"My Mirai"},cat:"food",icon:"🥤",x:242,y:92,
-   menu:{ja:["アイスコーヒー 200円","アイスティー 200円","ジュース 100円"],en:["Iced coffee ¥200","Iced tea ¥200","Juice ¥100"]}},
-  {id:16,name:{ja:"藤翠會",en:"Tosui-kai"},short:{ja:"藤翠會",en:"Tosui-kai"},cat:"food",icon:"☕",x:304,y:92,
-   menu:{ja:["ビーズワークショップ 400円・500円","アクセサリーくじ 300〜400円"],en:["Beads workshop ¥400/¥500","Accessory lottery ¥300–400"]}},
-  {id:17,name:{ja:"Fish Loving Uncle",en:"Fish Loving Uncle"},short:{ja:"金魚Fish",en:"Goldfish"},cat:"game",icon:"🐟",x:366,y:92,
-   menu:{ja:["すくいポイ 200円","メダカボトル 500円","水草 1束100円"],en:["Scoop poi ¥200","Medaka bottle ¥500","Water plant ¥100/bunch"]}},
-  // 左列（旧上段）上→下
-  {id:8,name:{ja:"Ms' Kitchen",en:"Ms' Kitchen"},short:{ja:"M's Kit.",en:"Ms' Kit."},cat:"food",icon:"🍳",x:50,y:160,
-   menu:{ja:["ドリロコス","フランクフルト","焼きマシュマロ","削りイチゴ","冷凍チョコバナナ"],en:["Dorilocos","Frankfurter","Grilled marshmallow","Shaved strawberry","Frozen choco banana"]}},
-  {id:7,name:{ja:"リフシア大庭",en:"Refucia Oba"},short:{ja:"リフシア",en:"Refucia"},cat:"food",icon:"🍡",x:50,y:234,
-   menu:{ja:["たこ焼き（5〜6個）350円","クレープ（生クリーム/カスタード/バナナ/チョコ）300〜400円"],en:["Takoyaki (5–6pcs) ¥350","Crêpe (cream/custard/banana/choco) ¥300–400"]}},
-  {id:6,name:{ja:"NPO法人煉成会",en:"NPO Rensei-kai"},short:{ja:"煉成会",en:"Rensei-kai"},cat:"other",icon:"🎁",x:50,y:308,
-   menu:{ja:["チョコバナナ","チョコマシュマロ","フルーツサイダー（缶詰みかん等トッピング）"],en:["Choco banana","Choco marshmallow","Fruit soda (canned mikan topping, etc.)"]}},
-  {id:5,name:{ja:"湘南スマイルカンパニー",en:"Shonan Smile Company"},short:{ja:"スマイル",en:"Smile"},cat:"food",icon:"🍺",x:50,y:382,
-   menu:{ja:["ビール 400円","ラムネ 200円","お茶 200円","ジュース 200円","焼き鳥 150円","酎ハイ 300円"],en:["Beer ¥400","Ramune ¥200","Tea ¥200","Juice ¥200","Yakitori ¥150","Chuhai ¥300"]}},
-  {id:4,name:{ja:"ことりのおうち",en:"Kotori no Ouchi"},short:{ja:"ことり",en:"Kotori"},cat:"food",icon:"🐦",x:50,y:456,
-   menu:{ja:["焼きそば","ふわふわドーム","スーパーボールすくい","人形すくい","宝石すくい"],en:["Yakisoba","Bouncy dome","Super ball scoop","Doll scoop","Jewel scoop"]}},
-  {id:3,name:{ja:"ワイドフェザー",en:"Wide Feather"},short:{ja:"ワイドフェザー",en:"Wide Feather"},cat:"other",icon:"🎨",x:50,y:530,
-   menu:{ja:["ワークショップ（サンキャッチャー、ボールペン、シャーペン、キーホルダー、ミラー、くし、コースター等）"],en:["Workshops (suncatcher, pens, keychain, mirror, comb, coaster, etc.)"]}},
-  {id:2,name:{ja:"三嶽英治・三嶽裕紀子",en:"Eiji & Yukiko Mitake"},short:{ja:"三嶽さん",en:"Mitake"},cat:"food",icon:"🍧",x:50,y:604,
-   menu:{ja:["サーターアンダギー"],en:["Sata andagi (Okinawan doughnut)"]}},
-  {id:1,name:{ja:"ぐるんとびー①・②",en:"Gurunto Bee ①・②"},short:{ja:"ぐるんとびー",en:"Gurunto Bee"},cat:"game",icon:"🎪",x:50,y:678,h:92,
-   menu:{ja:["① かき氷、ジュース","② 射的、くじ"],en:["① Shaved ice, juice","② Shooting game, lottery"]}},
-  // 右列（旧下段・実行委員ブース：台帳に団体行なし）上→下
-  {id:21,name:{ja:"スーパーボール・人形すくい",en:"Super Ball & Doll Scooping"},short:{ja:"Sボール人形",en:"Ball & Doll"},cat:"game",icon:"🥎",x:352,y:150},
-  {id:20,name:{ja:"かき氷",en:"Shaved Ice"},short:{ja:"かき氷",en:"Shaved Ice"},cat:"food",icon:"🍧",x:352,y:224},
-  {id:19,name:{ja:"ヨーヨーすくい",en:"Yo-yo Scooping"},short:{ja:"ヨーヨー",en:"Yo-yo"},cat:"game",icon:"🎈",x:352,y:298},
-  {id:18,name:{ja:"焼き鳥・生ビール",en:"Yakitori & Beer"},short:{ja:"鳥・ビール",en:"Chicken & Beer"},cat:"food",icon:"🍢",x:352,y:372},
-  // 下段（旧左列）左→右
-  {id:9,name:{ja:"学生団体えんあわせ",en:"Student Group En-awase"},short:{ja:"えんあわせ",en:"En-awase"},cat:"other",icon:"🎓",x:112,y:705,
-   menu:{ja:["駄菓子屋"],en:["Penny candy shop"]}},
-  {id:10,name:{ja:"学生団体 縁慈",en:"Student Group Enji"},short:{ja:"縁慈",en:"Enji"},cat:"game",icon:"🎯",x:205,y:705,
-   menu:{ja:["冷麺 400円","スモア 200円","ストラックアウト 100円"],en:["Cold noodles ¥400","S'mores ¥200","Strike-out ¥100"]}},
-  {id:11,name:{ja:"駒寄滝の沢SC",en:"Komayose Takinosawa SC"},short:{ja:"駒滝SC",en:"Takinosawa SC"},cat:"game",icon:"⚽",x:288,y:705,
-   menu:{ja:["キックターゲット 1回100円","光る玩具販売 100〜200円"],en:["Kick target ¥100/try","Glow toys ¥100–200"]}},
-];
+/* =======================================================================
+   会場マップ座標
+   出典: 0804-fix/paper02.png（出店一覧）
+   紙面のマップは反時計回りに90度回転した状態（南校門＝左上）で描かれている。
+   ここでは紙面を時計回りに90度戻し、「南校門を上」にした向きで再構成している。
+   　紙面 左端(C列)     → 上段（南側）
+   　紙面 上段(B列/本部) → 右列
+   　紙面 右端(A列)     → 下段（北側）
+   　紙面 下段(D列)     → 左列
+   ======================================================================= */
 
-const schedule = [
-  {time:"16:00",title:{ja:"太鼓",en:"Taiko Drums"},desc:{ja:"鈴鹿音神太鼓・湘南音神太鼓",en:"Suzuka Otokami Taiko & Shonan Otokami Taiko"},dur:30,transition:false},
-  {time:"16:30",title:{ja:"転換",en:"Changeover"},desc:{ja:"",en:""},dur:15,transition:true},
-  {time:"16:45",title:{ja:"子ども神輿",en:"Children's Mikoshi"},desc:{ja:"実行委員",en:"Festival committee"},dur:30,transition:false},
-  {time:"17:15",title:{ja:"転換",en:"Changeover"},desc:{ja:"",en:""},dur:15,transition:true},
-  {time:"17:30",title:{ja:"演武・キッズダンス・ヒップホップダンス",en:"Karate, Kids Dance & Hip-Hop Dance"},desc:{ja:"①空手演武（15分）波空会大庭支部　②キッズダンス（15分）湘南SPARKLE KIDS　③ヒップホップダンス（15分）LILY G",en:"① Karate performance (15min) Hakuu-kai Ohba　② Kids Dance (15min) Shonan SPARKLE KIDS　③ Hip-Hop Dance (15min) LILY G"},dur:60,transition:false},
-  {time:"18:30",title:{ja:"転換",en:"Changeover"},desc:{ja:"",en:""},dur:15,transition:true},
-  {time:"18:45",title:{ja:"みんなで盆踊り",en:"Bon Odori for Everyone"},desc:{ja:"湘南富斌会・八寿花会・湘南大庭民謡サークル",en:"Shonan Fuhinkai, Yasuka-kai & Shonan Ohba Folk Song Circle"},dur:30,transition:false},
-  {time:"19:15",title:{ja:"転換",en:"Changeover"},desc:{ja:"",en:""},dur:15,transition:true},
-  {time:"19:30",title:{ja:"抽選会",en:"Lottery Draw"},desc:{ja:"抽選担当",en:"Lottery staff"},dur:30,transition:false},
-  {time:"20:00",title:{ja:"終了",en:"End"},desc:{ja:"",en:""},dur:0,transition:true},
-];
-
-// img: 各社のバナー画像（webp）のパスを設定すると画像バナーに切り替わる。未設定（""）の間はテキストバナーで表示。
-//      例: img:"img/sponsors/familymart.webp"
-// url: リンク先は現時点で未確定のため仮に "#" を設定。決定次第、各urlを差し替えてください。
-const sponsors = [
-  {name:{ja:"ファミリーマート湘南ライフタウン店",en:"FamilyMart Shonan Life Town"},icon:"🏪",img:"",url:"#"},
-  {name:{ja:"河村建築",en:"Kawamura Architecture"},icon:"🏠",img:"",url:"#"},
-  {name:{ja:"Amo32",en:"Amo32"},icon:"🏢",img:"",url:"#"},
-  {name:{ja:"源平",en:"Genpei"},icon:"🏮",img:"",url:"#"},
-  {name:{ja:"ぐるんとびー",en:"Gurunto Bee"},icon:"🤝",img:"",url:"#"},
-  {name:{ja:"藤七建設株式会社",en:"Toshichi Construction Co."},icon:"🏗",img:"",url:"#"},
-  {name:{ja:"FUKAI Fitness Club",en:"FUKAI Fitness Club"},icon:"💪",img:"",url:"#"},
-  {name:{ja:"波空会",en:"Hakuu-kai"},icon:"🥋",img:"",url:"#"},
-  {name:{ja:"アルト湘南",en:"Alto Shonan"},icon:"🏢",img:"",url:"#"},
-  {name:{ja:"湘南サッカースクール",en:"Shonan Soccer School"},icon:"⚽",img:"",url:"#"},
-  {name:{ja:"藤沢大庭郵便局",en:"Fujisawa Oba Post Office"},icon:"📮",img:"",url:"#"},
-  {name:{ja:"藤沢湘南ライフタウン郵便局",en:"Fujisawa Shonan Life Town Post Office"},icon:"📮",img:"",url:"#"},
-  {name:{ja:"五反田保育園",en:"Gotanda Nursery School"},icon:"🧸",img:"",url:"#"},
-  {name:{ja:"とろわふれーる",en:"Trois Freres"},icon:"🥐",img:"",url:"#"},
-  {name:{ja:"Coffee Roasters Shonan",en:"Coffee Roasters Shonan"},icon:"☕",img:"",url:"#"},
-  {name:{ja:"光洋建設",en:"Koyo Construction"},icon:"🏗",img:"",url:"#"},
-  {name:{ja:"アイグステック株式会社",en:"AIGS TECH Inc."},icon:"🏢",img:"",url:"#"},
-  {name:{ja:"ネットヨタ",en:"Net Yota"},icon:"🚗",img:"",url:"#"},
-  {name:{ja:"ピアノワール音楽教室",en:"Piano Noir Music School"},icon:"🎹",img:"",url:"#"},
-  {name:{ja:"家族葬のファミーユ 藤沢大庭ホール",en:"Famille Fujisawa Oba Hall"},icon:"🕊",img:"",url:"#"},
-];
-
-const catColors = {food:"#FFEDE8",drink:"#FFF7E1",game:"#E2F7F1",other:"#E7F4FB"};
-const catText   = {food:"#9A3A22",drink:"#8A6400",game:"#0E6E58",other:"#1573A3"};
-const catLabels = {
-  ja:{food:"食べ物・飲み物",drink:"食べ物・飲み物",game:"ゲーム",other:"その他"},
-  en:{food:"Food & Drinks",drink:"Food & Drinks",game:"Games",other:"Other"}
+// 区画コード → SVG上の矩形（x,y は左上）
+const boothRects = {
+  // 上段（南口側）左→右
+  "C-1":{x:79, y:138, w:40, h:42}, "C-2":{x:127,y:138,w:40,h:42}, "C-3":{x:175,y:138,w:40,h:42},
+  "C-4":{x:223,y:138,w:40,h:42}, "C-5":{x:271,y:138,w:40,h:42}, "C-6":{x:319,y:138,w:40,h:42},
+  // 左列 上→下
+  "D-1":{x:79,y:191,w:40,h:46},  "D-2":{x:79,y:246,w:40,h:46},  "D-3":{x:79,y:302,w:40,h:46},
+  "D-4":{x:79,y:357,w:40,h:46},  "D-5":{x:79,y:414,w:40,h:46},  "D-6":{x:79,y:469,w:40,h:46},
+  "D-7":{x:79,y:525,w:40,h:46},  "D-8":{x:79,y:580,w:40,h:46},  "D-9":{x:79,y:635,w:40,h:46},
+  "D-10":{x:79,y:691,w:40,h:46},
+  // 右列 上→下
+  "B-1":{x:320,y:211,w:40,h:45}, "B-2":{x:320,y:267,w:40,h:45}, "B-3":{x:320,y:321,w:40,h:45},
+  "B-4":{x:320,y:375,w:40,h:45}, "B-5":{x:320,y:431,w:40,h:45}, "B-6":{x:320,y:491,w:40,h:45},
+  "B-7":{x:320,y:547,w:40,h:45},
+  // 下段（北口側）左→右。幅は実際の区画の大きさ（A-4＝ミニSLが最も広い）
+  "A-1":{x:103,y:748,w:40,h:44}, "A-2":{x:154,y:748,w:40,h:44},
+  "A-3":{x:200,y:748,w:54,h:44}, "A-4":{x:265,y:748,w:87,h:44},
 };
+
+// 施設・目印（タップ不可）
+const facilities = [
+  // 南校門（上）・北校門（下）
+  {type:"gate", x:378, y:88,  dir:"up",   label:{ja:"南校門",en:"South Gate"}},
+  {type:"gate", x:378, y:832, dir:"down", label:{ja:"北校門",en:"North Gate"}},
+  // やぐら
+  {type:"yagura", x:180, y:432, w:76, h:86, label:{ja:"やぐら",en:"Yagura"}},
+  // 本部・抽選箱
+  {type:"hq", x:320, y:605, w:40, h:117, label:{ja:["本部","抽選箱"],en:["HQ","Raffle"]}},
+  // ふわふわドーム
+  {type:"soft", x:46, y:796, w:58, h:62, label:{ja:["ふわふわ","ドーム"],en:["Bouncy","Dome"]}},
+  // トイレ（市民の家）＝南西角。校地の外にあるため枠外に置く
+  {type:"wc", x:42, y:20, w:104, h:32, label:{ja:"トイレ（市民の家）",en:"WC (Community House)"}},
+  // 駐輪場（枠外・南校門の上）。2段の中心をトイレ（市民の家）の箱の中心(y=36)と揃える
+  // 絵文字の分だけ字面が上に寄るため 1.5 だけ下げて補正している
+  {type:"note", x:404, y:37.5,
+   label:{ja:["🚲 駐輪場","おおばまるやま公園"], en:["🚲 Bicycle Parking","Ooba Maruyama Park"]}},
+  // トイレ（スタンド側）
+  {type:"wc", x:366, y:544, w:38, h:58, vertical:true, label:{ja:"トイレ",en:"WC"}},
+  // スタンド・校舎（帯の見出し）
+  {type:"stand", x:385, y:400, label:{ja:"スタンド・校舎",en:"Stand"}},
+];
+
+/* =======================================================================
+   出店データ（出典: 0804-fix/paper02.png）
+   area: 紙面のエリア（A/B/C/D）＝マップの色分け
+   no  : 紙面の丸数字
+   cat : 絞り込み用（food / game / other）
+   menu: 金額入りの明細は「団体提出書類・メニュー確認リスト.xlsx」より補完
+   ======================================================================= */
+const vendors = [
+  // ===== A（下段・北口側）左→右 =====
+  {area:"A", no:"①", codes:["A-1"], cat:"other", icon:"🎨",
+   name:{ja:"ワークショップ",en:"Craft Workshop"}, org:{ja:"ワイドフェザー",en:"Wide Feather"},
+   menu:{ja:["サンキャッチャー","ボールペン・シャーペン","キーホルダー","ミラー・くし","コースター など"],
+         en:["Suncatcher","Ballpoint & mechanical pencils","Keychain","Mirror & comb","Coaster, etc."]}},
+  {area:"A", no:"②", codes:["A-2"], cat:"food", icon:"🍬",
+   name:{ja:"駄菓子屋",en:"Penny Candy Shop"}, org:{ja:"学生団体えんあわせ",en:"Student Group En-awase"},
+   menu:{ja:["駄菓子いろいろ"],en:["Assorted penny candy"]}},
+  {area:"A", no:"③", codes:["A-3"], cat:"game", icon:"⚽",
+   name:{ja:"キックターゲット",en:"Kick Target"}, org:{ja:"駒寄滝の沢SC",en:"Komayose Takinosawa SC"},
+   menu:{ja:["キックターゲット 1回100円","光る玩具販売 100〜200円"],en:["Kick target ¥100/try","Glow toys ¥100–200"]}},
+  {area:"A", no:"④", codes:["A-4"], cat:"game", icon:"🚂",
+   name:{ja:"ミニSL",en:"Mini Steam Train"}, org:{ja:"こども汽車",en:"Kids Train"},
+   menu:{ja:["ミニSL乗車（こども汽車）"],en:["Mini SL ride (kids train)"]}},
+
+  // ===== B（右列・実行委員会） =====
+  {area:"B", no:"①②", codes:["B-1","B-2"], cat:"food", icon:"🍢",
+   name:{ja:"焼き鳥・ビール・飲み物",en:"Yakitori, Beer & Drinks"}, org:{ja:"実行委員会",en:"Festival Committee"},
+   menu:{ja:["焼き鳥","生ビール","ソフトドリンク"],en:["Yakitori","Draft beer","Soft drinks"]}},
+  {area:"B", no:"③", codes:["B-3"], cat:"game", icon:"🥎",
+   name:{ja:"スーパーボール／人形すくい",en:"Super Ball & Doll Scooping"}, org:{ja:"実行委員会",en:"Festival Committee"},
+   menu:{ja:["スーパーボールすくい","人形すくい"],en:["Super ball scooping","Doll scooping"]}},
+  {area:"B", no:"④", codes:["B-4"], cat:"food", icon:"🍧",
+   name:{ja:"かき氷",en:"Shaved Ice"}, org:{ja:"実行委員会",en:"Festival Committee"},
+   menu:{ja:["かき氷"],en:["Shaved ice"]}},
+  {area:"B", no:"⑤⑥", codes:["B-5","B-6"], cat:"game", icon:"🎈",
+   name:{ja:"ヨーヨーすくい／木札ワークショップ",en:"Yo-yo Scooping & Wood Tag Workshop"}, org:{ja:"実行委員会",en:"Festival Committee"},
+   menu:{ja:["ヨーヨーすくい","木札ワークショップ"],en:["Yo-yo scooping","Wood name-tag workshop"]}},
+  {area:"B", no:"⑦", codes:["B-7"], cat:"food", icon:"🍞",
+   name:{ja:"あげぱん",en:"Fried Bread"}, org:{ja:"実行委員会",en:"Festival Committee"},
+   menu:{ja:["あげぱん"],en:["Age-pan (fried bread)"]}},
+
+  // ===== C（上段・南口側）左→右 =====
+  {area:"C", no:"①", codes:["C-1"], cat:"food", icon:"🦑",
+   name:{ja:"イカ焼き・ラムネ",en:"Grilled Squid & Ramune"}, org:{ja:"学生団体Seaside Link",en:"Student Group Seaside Link"},
+   menu:{ja:["イカ焼き","ラムネ"],en:["Grilled squid","Ramune soda"]}},
+  {area:"C", no:"②", codes:["C-2"], cat:"food", icon:"🌭",
+   name:{ja:"ホットドッグ・アイス・ゲーム",en:"Hot Dog, Ice Cream & Games"}, org:{ja:"藤沢南ロータリークラブ",en:"Fujisawa Minami Rotary Club"},
+   menu:{ja:["ホットドッグ","アイス","ゲーム"],en:["Hot dog","Ice cream","Games"]}},
+  {area:"C", no:"③", codes:["C-3"], cat:"food", icon:"🍗",
+   name:{ja:"唐揚げ・焼きそば・パン",en:"Fried Chicken, Yakisoba & Bread"}, org:{ja:"光友会",en:"Koyu-kai"},
+   menu:{ja:["唐揚げ","焼きそば","パン"],en:["Fried chicken","Yakisoba","Bread"]}},
+  {area:"C", no:"④", codes:["C-4"], cat:"food", icon:"🥤",
+   name:{ja:"アイスコーヒー・ジュース",en:"Iced Coffee & Juice"}, org:{ja:"マイミライnext",en:"My Mirai next"},
+   menu:{ja:["アイスコーヒー 200円","アイスティー 200円","ジュース 100円"],en:["Iced coffee ¥200","Iced tea ¥200","Juice ¥100"]}},
+  {area:"C", no:"⑤", codes:["C-5"], cat:"other", icon:"💠",
+   name:{ja:"ワークショップ・くじ",en:"Workshop & Lottery"}, org:{ja:"藤翠會",en:"Tosui-kai"},
+   menu:{ja:["ビーズワークショップ 400円・500円","アクセサリーくじ 300〜400円"],en:["Beads workshop ¥400 / ¥500","Accessory lottery ¥300–400"]}},
+  {area:"C", no:"⑥", codes:["C-6"], cat:"game", icon:"🐟",
+   name:{ja:"お魚すくい",en:"Fish Scooping"}, org:{ja:"Fish loving uncle",en:"Fish loving uncle"},
+   menu:{ja:["すくいポイ 200円","メダカボトル 500円","水草 1束100円"],en:["Scoop poi ¥200","Medaka bottle ¥500","Water plants ¥100/bunch"]}},
+
+  // ===== D（左列） =====
+  {area:"D", no:"①", codes:["D-1"], cat:"food", icon:"🌭",
+   name:{ja:"ドリロコス・フランクフルト",en:"Dorilocos & Frankfurter"}, org:{ja:"Ms'kitchen",en:"Ms' Kitchen"},
+   menu:{ja:["ドリロコス","フランクフルト"],en:["Dorilocos","Frankfurter"]}},
+  {area:"D", no:"②", codes:["D-2"], cat:"food", icon:"🍺",
+   name:{ja:"ビール・ラムネ・焼き鳥・お茶",en:"Beer, Ramune, Yakitori & Tea"}, org:{ja:"スマイルカンパニー",en:"Smile Company"},
+   menu:{ja:["ビール 400円","ラムネ 200円","お茶 200円","焼き鳥 150円"],en:["Beer ¥400","Ramune ¥200","Tea ¥200","Yakitori ¥150"]}},
+  {area:"D", no:"③④", codes:["D-3","D-4"], cat:"food", icon:"🍡",
+   name:{ja:"タコ焼き・クレープ",en:"Takoyaki & Crêpes"}, org:{ja:"リフシア大庭",en:"Refucia Oba"},
+   menu:{ja:["たこ焼き（5〜6個）350円","クレープ（生クリーム／カスタード／バナナ／チョコ）300〜400円"],
+         en:["Takoyaki (5–6 pcs) ¥350","Crêpe (cream / custard / banana / choco) ¥300–400"]}},
+  {area:"D", no:"⑤", codes:["D-5"], cat:"food", icon:"🍫",
+   name:{ja:"チョコバナナ・フルーツサイダー",en:"Choco Banana & Fruit Soda"}, org:{ja:"煉成会",en:"Rensei-kai"},
+   menu:{ja:["チョコバナナ","フルーツサイダー"],en:["Choco banana","Fruit soda"]}},
+  {area:"D", no:"⑥", codes:["D-6"], cat:"food", icon:"🍜",
+   name:{ja:"焼きそば・スーパーボールすくい",en:"Yakisoba & Super Ball Scooping"}, org:{ja:"ことりのおうち",en:"Kotori no Ouchi"},
+   menu:{ja:["焼きそば","スーパーボールすくい"],en:["Yakisoba","Super ball scooping"]}},
+  {area:"D", no:"⑦", codes:["D-7"], cat:"food", icon:"🍩",
+   name:{ja:"サーターアンダギー",en:"Sata Andagi"}, org:{ja:"三嶽英治・三嶽裕紀子",en:"Eiji & Yukiko Mitake"},
+   menu:{ja:["サーターアンダギー"],en:["Sata andagi (Okinawan doughnut)"]}},
+  {area:"D", no:"⑧", codes:["D-8"], cat:"food", icon:"🍲",
+   name:{ja:"冷麺・ストラックアウト",en:"Cold Noodles & Strike-Out"}, org:{ja:"学生団体縁慈",en:"Student Group Enji"},
+   menu:{ja:["冷麺 400円","ストラックアウト 100円"],en:["Cold noodles ¥400","Strike-out ¥100"]}},
+  {area:"D", no:"⑨⑩", codes:["D-9","D-10"], cat:"food", icon:"🎯",
+   name:{ja:"かき氷・ジュース・射的・くじ",en:"Shaved Ice, Juice, Shooting & Lottery"}, org:{ja:"ぐるんとびー",en:"Gurunto Bee"},
+   menu:{ja:["かき氷","ジュース","射的","くじ"],en:["Shaved ice","Juice","Shooting game","Lottery"]}},
+];
+
+/* =======================================================================
+   イベントスケジュール（出典: 0804-fix/paper01.png）
+   ======================================================================= */
+const schedule = [
+  {time:"16:00", dur:50,
+   acts:[{name:{ja:"祭りばやし（太鼓）",en:"Matsuri-bayashi (Taiko Drums)"},
+          org:{ja:"鈴鹿音神太鼓・湘南音神太鼓",en:"Suzuka Otokami Taiko / Shonan Otokami Taiko"}}]},
+  {time:"16:50", dur:40,
+   acts:[{name:{ja:"こどもみこし",en:"Children's Mikoshi"}, org:null}],
+   bubble:{ja:"こどもみこし参加者に<br><strong>ガリガリ君</strong>プレゼント",
+           en:"<strong>Gari-Gari-Kun</strong> ice pops<br>for all mikoshi participants"},
+   bubbleIcon:"img/icon/ice-256.webp"},
+  {time:"17:30", dur:70,
+   acts:[{name:{ja:"空手演武（型、板割り）",en:"Karate Demo (kata & board breaking)"}, org:{ja:"波空会大庭支部",en:"Hakuu-kai Oba Branch"}},
+         {name:{ja:"キッズダンス",en:"Kids Dance"}, org:{ja:"湘南SPARKLE KIDS",en:"Shonan SPARKLE KIDS"}},
+         {name:{ja:"ヒップホップダンス",en:"Hip-Hop Dance"}, org:{ja:"LILY G",en:"LILY G"}}]},
+  {time:"18:40", dur:50,
+   acts:[{name:{ja:"みんなで盆踊り",en:"Bon Odori for Everyone"},
+          org:{ja:"湘南富斌会・八寿花会・湘南大庭民謡サークル",en:"Shonan Fuhin-kai / Yasuka-kai / Shonan Oba Folk Song Circle"}}]},
+  {time:"19:30", dur:30,
+   acts:[{name:{ja:"こまよせ大抽選会",en:"Komayose Grand Raffle"}, org:null}]},
+  {time:"20:00", dur:0, end:true,
+   acts:[{name:{ja:"終了",en:"End"}, org:null}]},
+];
+
+/* =======================================================================
+   ご協賛いただいた皆さま
+   name : 0804-fix/paper02.png（紙面の表記）
+   img  : img/bannerWebp/*.webp（軽量化のためWebP）
+   url  : 0804-fix/0_スポンサーリスト v2.xlsx シート「2026協賛金」F列（URL）
+          河村建築・グリーンキッズ湘南ライフタウンは台帳にURLが未記入、
+          社会福祉法人光友会は台帳に行が無いため、この3件はリンクなし（バナー表示のみ）。
+   ======================================================================= */
+const sponsors = [
+  {name:{ja:"ぐるんとびー",en:"Gurunto Bee"}, img:"img/bannerWebp/01_ぐるんとびー.webp",
+   url:"https://grundtvig.co.jp/"},
+  {name:{ja:"アイグステック株式会社",en:"AIGS TECH Inc."}, img:"img/bannerWebp/02_アイグステック.webp",
+   url:"https://www.aigs-tech.jp/"},
+  {name:{ja:"波空会",en:"Hakuu-kai"}, img:"img/bannerWebp/03_波空会.webp",
+   url:"https://www.instagram.com/ohba_hakukai_karate/"},
+  {name:{ja:"アルト湘南",en:"Alto Shonan"}, img:"img/bannerWebp/04_アルト湘南.webp",
+   url:"https://www.instagram.com/ohba_kickboxing_shonanaalto/"},
+  {name:{ja:"家族葬のファミーユ 藤沢大庭ホール",en:"Famille Fujisawa Oba Hall"}, img:"img/bannerWebp/05_ファミーユ藤沢大庭ホール.webp",
+   url:"https://www.famille-kazokusou.com/search_area/kanagawa/fujisawashi/post-1698.html"},
+  {name:{ja:"ファミリーマート湘南ライフタウン店",en:"FamilyMart Shonan Life Town"}, img:"img/bannerWebp/06_ファミリーマート.webp",
+   url:"https://store.family.co.jp/points/23152"},
+  {name:{ja:"河村建築",en:"Kawamura Architecture"}, img:"img/bannerWebp/07_河村建築.webp",
+   url:""},
+  {name:{ja:"湘南サッカースクール",en:"Shonan Soccer School"}, img:"img/bannerWebp/08_湘南サッカースクール.webp",
+   url:"https://shonan-soccer-school.com/"},
+  {name:{ja:"五反田保育園",en:"Gotanda Nursery School"}, img:"img/bannerWebp/09_五反田保育園.webp",
+   url:"https://kosodate-web.com/shonan/gotanda/"},
+  {name:{ja:"ピアノワール音楽教室",en:"Piano Noir Music School"}, img:"img/bannerWebp/10_ピアノワール音楽教室.webp",
+   url:"https://pianoir.hp-ez.com/"},
+  {name:{ja:"ふじさわーく",en:"Fujisawark"}, img:"img/bannerWebp/11_ふじさわーく.webp",
+   url:"https://fujisawork.com/"},
+  {name:{ja:"リフシア大庭",en:"Refucia Oba"}, img:"img/bannerWebp/12_リフシア大庭.webp",
+   url:"https://lifsea.co.jp/index.html"},
+  {name:{ja:"株式会社不動マネジメント",en:"Fudo Management Co., Ltd."}, img:"img/bannerWebp/13_不動マネジメント.webp",
+   url:"https://fudo-m.com/"},
+  {name:{ja:"源平",en:"Genpei"}, img:"img/bannerWebp/14_源平.webp",
+   url:"https://www.instagram.com/genpei116/"},
+  {name:{ja:"M's kitchen",en:"M's kitchen"}, img:"img/bannerWebp/15_Ms_kitchen.webp",
+   url:"https://www.instagram.com/ms.kitchencar/"},
+  {name:{ja:"Amo32",en:"Amo32"}, img:"img/bannerWebp/16_Amo32.webp",
+   url:"https://amo32.com/"},
+  {name:{ja:"藤七建設株式会社",en:"Toshichi Construction Co., Ltd."}, img:"img/bannerWebp/17_藤七建設.webp",
+   url:"https://www.kensetumap.com/company/215712/"},
+  {name:{ja:"FUKAI Fitness Club",en:"FUKAI Fitness Club"}, img:"img/bannerWebp/18_FUKAI_Fitness_Club.webp",
+   url:"https://fukai-style.jp/"},
+  {name:{ja:"藤沢大庭郵便局",en:"Fujisawa Oba Post Office"}, img:"img/bannerWebp/19_藤沢大庭郵便局.webp",
+   url:"https://map.japanpost.jp/p/search/dtl/300102669000/"},
+  {name:{ja:"藤沢湘南ライフタウン郵便局",en:"Fujisawa Shonan Life Town Post Office"}, img:"img/bannerWebp/20_藤沢湘南ライフタウン郵便局.webp",
+   url:"https://map.japanpost.jp/p/search/dtl/300109044000/"},
+  {name:{ja:"光洋建設株式会社",en:"Koyo Construction Co., Ltd."}, img:"img/bannerWebp/21_光洋建設.webp",
+   url:"https://koyo-k-recruit.com/"},
+  {name:{ja:"トヨタ モビリティ神奈川 中古車タウン湘南",en:"Toyota Mobility Kanagawa, Used Car Town Shonan"}, img:"img/bannerWebp/22_トヨタモビリティ神奈川.webp",
+   url:"https://www.toyota-mobility-kanagawa.jp/shop/shonan/chukoshatownshonan"},
+  {name:{ja:"みんなdeこども会",en:"Minna de Kodomo-kai"}, img:"img/bannerWebp/23_みんなdeこども会.webp",
+   url:"https://www.instagram.com/kodomokai_shonan/"},
+  {name:{ja:"グリーンキッズ湘南ライフタウン",en:"Green Kids Shonan Life Town"}, img:"img/bannerWebp/24_グリーンキッズ湘南ライフタウン.webp",
+   url:""},
+  {name:{ja:"社会福祉法人光友会",en:"Koyu-kai Social Welfare Corporation"}, img:"img/bannerWebp/25_光友会.webp",
+   url:""},
+  {name:{ja:"Coffee Roasters Shonan",en:"Coffee Roasters Shonan"}, img:"img/bannerWebp/26_CoffeeRoastersShonan.webp",
+   url:"https://www.win-coffee.co.jp/"},
+  {name:{ja:"とろわふれーる",en:"Trois Frères"}, img:"img/bannerWebp/27_とろわふれーる.webp",
+   url:"https://www.instagram.com/troisfreres5214/"},
+];
+
+const areaFill = {A:"#FFDBF8", B:"#BAE3FF", C:"#BAE0BD", D:"#FFF6BA"};
+const areaLine = {A:"#E9A7DA", B:"#86C6EE", C:"#8CC793", D:"#E8D479"};
+const areaInk  = {A:"#9B2C86", B:"#17568C", C:"#1D6B3E", D:"#8A6300"};
+
+const catColors = {food:"#FFEDE2", game:"#E2F4E5", other:"#EAF1FF"};
+const catText   = {food:"#A33B00", game:"#1D6B3E", other:"#2A4A8F"};
+const catLabels = {
+  ja:{food:"食べ物・飲み物", game:"あそび", other:"その他"},
+  en:{food:"Food & Drinks", game:"Games & Play", other:"Other"}
+};
+
 const requests = [
   {ja:"芝生、花壇、プールには入らないでください",en:"Please do not enter the lawn, flower beds, or pool."},
-  {ja:"ゴミの分別（可燃、ビン、カン、ペットボトル、不燃）にご協力ください",en:"Please sort trash (burnable, bottles, cans, PET bottles, non-burnable)."},
+  {ja:"ゴミの分別（可燃、ビン、カン、ペットボトル、不燃）にご協力ください",en:"Please sort your trash (burnable, bottles, cans, PET bottles, non-burnable)."},
   {ja:"グラウンドへの自転車・バイクの乗り入れはできません",en:"Bicycles and motorbikes are not allowed on the grounds."},
   {ja:"学校周辺は禁煙となっております",en:"The area around the school is smoke-free."},
-  {ja:"事故、怪我には十分ご注意ください",en:"Please be careful to avoid accidents or injury."},
+  {ja:"事故、怪我には十分ご注意ください",en:"Please take care to avoid accidents or injury."},
   {ja:"未成年者の飲酒は法律で禁じられています",en:"Alcohol consumption by minors is prohibited by law."},
+  {ja:"近隣へお住まいの皆さまにはご迷惑をお掛けしますが何卒ご理解の程よろしくお願いします",en:"We appreciate the understanding of everyone living nearby."},
 ];
 
 let lang = "ja";
-let activeId = null;
+let activeKey = null;   // vendors のインデックス
 let activeCat = "all";
 
 // ===== LANG =====
 const i18n = {
   ja: {
     navMap:"屋台マップ", navSched:"スケジュール", navSponsors:"協賛企業", navInfo:"インフォ",
-    mapTitle:"屋台配置マップ", filterLabel:"絞り込み:",
-    fbAll:"すべて", fbFood:"食べ物・飲み物", fbGame:"ゲーム", fbOther:"その他",
-    mapHint:"屋台アイコンをタップするとメニューが表示されます",
-    schedTitle:"タイムスケジュール",
-    sponsorTitle:"協賛企業", sponsorIntro:"こまよせ夏祭りは、以下の企業様のご協賛により開催されています。",
-    headerDate:"2026年8月22日（土）",
-    headerBadge:"第42回 駒寄地区",
-    headerTitle:"夏祭り 2026", headerScript:"Komayose Summer Festival",
-    headerSub:"駒寄小学校グラウンド / 16:00〜20:00",
+    mapTitle:"出店一覧・会場マップ",
+    filterLabel:"絞り込み:",
+    fbAll:"すべて", fbFood:"食べ物・飲み物", fbGame:"あそび", fbOther:"その他",
+    mapHint:"マップの番号または下の一覧をタップするとメニューが見られます",
+    schedTitle:"イベントスケジュール",
+    sponsorTitle:"ご協賛いただいた皆さま",
+    sponsorIntro:"こまよせ夏祭りは、以下の皆さまのご協賛により開催されています。<br><span class=\"sponsor-tip\">↗マークのついたバナーをタップすると、各社のウェブサイトをご覧いただけます。</span>",
+    infoTitle:"インフォメーション",
+    headerBadge:"第42回<br>駒寄地区",
+    headerTitle:"夏祭り",
+    headerScript:"Komayose Summer Festival",
+    headerDate:'<span class="d-num">8</span><span class="d-unit">月</span><span class="d-num">22</span><span class="d-unit">日</span><span class="d-dow">土</span><span class="d-time">16:00〜20:00</span>',
+    headerPlace:"駒寄小学校グラウンド",
+    headerNote:"※雨天の場合は中止します",
     noticeTitleRain:"雨天時について", noticeBodyRain:"※雨天の場合は中止します。",
-    noticeTitle2:"禁煙・ゴミのお持ち帰りについて", noticeBody2:"会場内は全面禁煙です。ゴミは各自お持ち帰りいただくか、所定のゴミ箱をご利用ください。",
-    noticeTitle3:"迷子・救護について", noticeBody3:"迷子や体調不良の際はインフォメーションテントまでお越しください。スタッフが対応いたします。",
+    noticeTitleBike:"駐輪について", noticeBodyBike:"自転車は「おおばまるやま公園」に駐輪をお願いします。グラウンドへの自転車・バイクの乗り入れはできません。",
+    noticeTitleWc:"トイレ", noticeBodyWc:"グラウンド北側（スタンド・校舎側）と、南西角の「市民の家」の2か所です。",
+    noticeTitleHq:"本部・抽選箱", noticeBodyHq:"グラウンド北東側の本部テントに抽選箱があります。19:30〜「こまよせ大抽選会」を行います。",
+    noticeTitle2:"禁煙・ゴミについて", noticeBody2:"学校周辺は全面禁煙です。ゴミは分別のうえ所定のゴミ箱をご利用いただくか、お持ち帰りください。",
+    noticeTitle3:"迷子・救護について", noticeBody3:"迷子や体調不良の際は本部テントまでお越しください。スタッフが対応いたします。",
     requestTitle:"お願い",
     menuComingSoon:"メニュー準備中",
     badgeNow:"いま", badgeNext:"次のイベント",
     footerOrganizerLabel:"主催", footerOrganizer:"駒寄地区自治会連合会",
+    footerOrganizerSub:"第一駒寄／第二駒寄／五反田／シャルマンコーポ／ダイヤパレスⅡ／MINASIA",
+    footerSupportLabel:"協力", footerSupport:"駒寄小学校／駒寄地区社会体育振興協議会／藤沢市保健医療センター",
     footerOperatorLabel:"運営", footerOperator:"駒寄地区夏祭り実行委員会",
     footerInstaLabel:"公式Instagram", footerCopyName:"駒寄地区夏祭り実行委員会",
   },
   en: {
     navMap:"Map", navSched:"Schedule", navSponsors:"Sponsors", navInfo:"Info",
-    mapTitle:"Stall Map", filterLabel:"Filter:",
-    fbAll:"All", fbFood:"Food & Drinks", fbGame:"Games", fbOther:"Other",
-    mapHint:"Tap a stall icon to see its menu",
+    mapTitle:"Stalls & Venue Map",
+    filterLabel:"Filter:",
+    fbAll:"All", fbFood:"Food & Drinks", fbGame:"Games & Play", fbOther:"Other",
+    mapHint:"Tap a code on the map, or a row in the lists below, to see the menu",
     schedTitle:"Event Schedule",
-    sponsorTitle:"Our Sponsors", sponsorIntro:"The Komayose Summer Festival is made possible thanks to the generous support of these companies.",
-    headerDate:"August 22 (Sat), 2026",
-    headerBadge:"42nd Komayose District",
-    headerTitle:"Summer Festival 2026", headerScript:"Komayose Summer Festival",
-    headerSub:"Komayose Elementary School Grounds / 4:00 PM – 8:00 PM",
-    noticeTitleRain:"In Case of Rain", noticeBodyRain:"※The festival will be cancelled in case of rain.",
-    noticeTitle2:"No Smoking & Waste Policy", noticeBody2:"The venue is entirely smoke-free. Please take your trash home or use the designated bins.",
-    noticeTitle3:"Lost Children & First Aid", noticeBody3:"For lost children or medical concerns, please visit the information tent. Staff will assist you.",
+    sponsorTitle:"Our Sponsors",
+    sponsorIntro:"The Komayose Summer Festival is made possible by the generous support of the following sponsors.<br><span class=\"sponsor-tip\">Tap any banner marked ↗ to visit that sponsor's website.</span>",
+    infoTitle:"Information",
+    headerBadge:"42nd<br>Komayose District",
+    headerTitle:"Summer Festival",
+    headerScript:"Komayose Summer Festival",
+    headerDate:'<span class="d-num">Aug 22</span><span class="d-dow">Sat</span><span class="d-time">4–8 PM</span>',
+    headerPlace:"Komayose Elementary School Grounds",
+    headerNote:"*Cancelled in case of rain",
+    noticeTitleRain:"In Case of Rain", noticeBodyRain:"*The festival will be cancelled in case of rain.",
+    noticeTitleBike:"Bicycle Parking", noticeBodyBike:"Please park bicycles at Ooba Maruyama Park. Bicycles and motorbikes are not allowed on the grounds.",
+    noticeTitleWc:"Restrooms", noticeBodyWc:"Two locations: the north side of the grounds (stand / school building side), and the Community House at the southwest corner.",
+    noticeTitleHq:"HQ & Raffle Box", noticeBodyHq:"The raffle box is at the HQ tent on the northeast side of the grounds. The Komayose Grand Raffle starts at 7:30 PM.",
+    noticeTitle2:"No Smoking & Waste", noticeBody2:"The area around the school is entirely smoke-free. Please sort your trash and use the designated bins, or take it home.",
+    noticeTitle3:"Lost Children & First Aid", noticeBody3:"For lost children or medical concerns, please come to the HQ tent. Staff will assist you.",
     requestTitle:"Please Note",
     menuComingSoon:"Menu coming soon",
     badgeNow:"Now", badgeNext:"Up Next",
-    footerOrganizerLabel:"Organizer", footerOrganizer:"Komayose District Neighborhood Association",
+    footerOrganizerLabel:"Organizer", footerOrganizer:"Komayose District Neighborhood Association Federation",
+    footerOrganizerSub:"Dai-ichi Komayose / Dai-ni Komayose / Gotanda / Charmant Corpo / Diapalace II / MINASIA",
+    footerSupportLabel:"Support", footerSupport:"Komayose Elementary School / Komayose District Sports Promotion Council / Fujisawa Health & Medical Center",
     footerOperatorLabel:"Operated by", footerOperator:"Komayose Summer Festival Committee",
     footerInstaLabel:"Official Instagram", footerCopyName:"Komayose Summer Festival Committee",
   }
 };
 
+const I18N_IDS = ["navMap","navSched","navSponsors","navInfo","mapTitle","filterLabel",
+  "fbAll","fbFood","fbGame","fbOther","mapHint","schedTitle","sponsorTitle","sponsorIntro",
+  "infoTitle","headerBadge","headerTitle","headerScript","headerDate","headerPlace","headerNote",
+  "noticeTitleRain","noticeBodyRain","noticeTitleBike","noticeBodyBike","noticeTitleWc","noticeBodyWc",
+  "noticeTitleHq","noticeBodyHq","noticeTitle2","noticeBody2","noticeTitle3","noticeBody3","requestTitle",
+  "footerOrganizerLabel","footerOrganizer","footerOrganizerSub","footerSupportLabel","footerSupport",
+  "footerOperatorLabel","footerOperator","footerInstaLabel","footerCopyName"];
+
 function setLang(l) {
   lang = l;
-  document.querySelectorAll(".lang-btn").forEach(b => b.classList.toggle("active", b.textContent === (l==="ja"?"日本語":"English")));
+  document.querySelectorAll(".lang-btn").forEach(b => b.classList.toggle("active", b.textContent === (l === "ja" ? "日本語" : "English")));
   const t = i18n[l];
-  ["navMap","navSched","navSponsors","navInfo","mapTitle","filterLabel","fbAll","fbFood","fbGame","fbOther","mapHint","schedTitle","sponsorTitle","sponsorIntro","headerDate","headerBadge","headerTitle","headerScript","headerSub","noticeTitleRain","noticeBodyRain","noticeTitle2","noticeBody2","noticeTitle3","noticeBody3","requestTitle","footerOrganizerLabel","footerOrganizer","footerOperatorLabel","footerOperator","footerInstaLabel","footerCopyName"].forEach(k => {
+  I18N_IDS.forEach(k => {
     const el = document.getElementById(k);
-    if(el) el.innerHTML = t[k];
+    if (el && t[k] !== undefined) el.innerHTML = t[k];
   });
   renderMap();
+  renderAreaCards();
   renderTimeline();
   renderSponsors();
   renderRequests();
-  if(activeId) showPopup();
+  if (activeKey !== null) showPopup();
 }
 
 // ===== SECTIONS =====
@@ -1037,77 +1240,226 @@ function switchSection(id) {
   document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.sec === id));
   document.getElementById("sec-" + id).classList.add("active");
+  window.scrollTo({top: 0, behavior: "smooth"});
 }
 
 // ===== MAP =====
-function renderMap() {
-  const layer = document.getElementById("stallLayer");
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs) {
+  const n = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  return n;
+}
+function svgText(x, y, str, attrs) {
+  const t = el("text", Object.assign({x, y, "text-anchor":"middle", "font-family":"sans-serif"}, attrs));
+  t.textContent = str;
+  return t;
+}
+
+// 縦書き。日本語は1文字ずつ正立させて縦に積み、欧文は語ごと90度回転させる。
+function svgVText(x, yCenter, str, attrs) {
+  const g = el("g", {});
+  if (!/[　-鿿＀-￯]/.test(str)) {
+    const t = svgText(0, 0, str, attrs);
+    t.setAttribute("transform", `translate(${x} ${yCenter}) rotate(90)`);
+    t.setAttribute("dy", parseFloat(attrs["font-size"]) * 0.35);
+    g.appendChild(t);
+    return g;
+  }
+  const chars = [...str];
+  const step = parseFloat(attrs["font-size"]) * 1.08;
+  const y0 = yCenter - (chars.length - 1) * step / 2;
+  chars.forEach((c, i) => g.appendChild(svgText(x, y0 + i * step, c, attrs)));
+  return g;
+}
+
+// やぐらの太鼓アイコン。読み込めたときだけ画像を使い、だめなら絵文字のままにする
+const WADAIKO_SRC = "img/icon/wadaiko-128.webp";
+let wadaikoOk = false;
+function initWadaiko() {
+  const probe = new Image();
+  probe.onload = () => { wadaikoOk = true; renderMap(); };  // 確認できてから描き直す
+  probe.src = WADAIKO_SRC;                                   // 失敗時は何もしない＝絵文字のまま
+}
+
+function renderFacilities() {
+  const layer = document.getElementById("facilityLayer");
   layer.innerHTML = "";
-  const W = 58, H = 46;
-  stalls.forEach(s => {
-    const w = s.w || W, h = s.h || H;  // 複数店舗の屋台は s.w / s.h で箱を拡大
-    const show = activeCat === "all" || s.cat === activeCat;
-    const isActive = activeId === s.id;
-    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    g.style.opacity = show ? "1" : "0.2";
-    g.style.cursor = show ? "pointer" : "default";
-    g.style.transition = "opacity 0.2s";
-
-    const r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    r.setAttribute("x", s.x - w / 2); r.setAttribute("y", s.y - h / 2);
-    r.setAttribute("width", w); r.setAttribute("height", h); r.setAttribute("rx", "9");
-    r.setAttribute("fill", isActive ? "#1E90C9" : catColors[s.cat]);
-    r.setAttribute("stroke", isActive ? "#1573A3" : catText[s.cat]);
-    r.setAttribute("stroke-width", isActive ? "2.5" : "1.2");
-
-    const em = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    em.setAttribute("x", s.x); em.setAttribute("y", s.y - 3);
-    em.setAttribute("text-anchor", "middle"); em.setAttribute("font-size", "15");
-    em.textContent = s.icon;
-
-    const lb = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    lb.setAttribute("x", s.x); lb.setAttribute("y", s.y + 15);
-    lb.setAttribute("text-anchor", "middle"); lb.setAttribute("font-size", "8");
-    lb.setAttribute("fill", isActive ? "#fff" : catText[s.cat]);
-    lb.setAttribute("font-family", "sans-serif"); lb.setAttribute("font-weight", "700");
-    const n = (s.short ? s.short[lang] : s.name[lang]);
-    lb.textContent = n.length > 8 ? n.slice(0, 8) + "…" : n;
-
-    g.appendChild(r); g.appendChild(em); g.appendChild(lb);
-    if(show) {
-      g.addEventListener("click", () => {
-        activeId = activeId === s.id ? null : s.id;
-        renderMap(); showPopup();
+  const fitBoxes = [];
+  facilities.forEach(f => {
+    const g = el("g", {});
+    if (f.type === "gate") {
+      // 斜めの双方向矢印（紙面と同じ、出入口＝門の向きを示す）
+      // 南校門は上（右上向き）、北校門は下（右下向き）
+      const up = f.dir === "up";
+      const cy = up ? f.y - 8 : f.y + 8;
+      const s = up ? -1 : 1;                     // 上向き / 下向き
+      const ax = f.x - 9, ay = cy - s * 7;       // 起点（内側）
+      const bx = f.x + 9, by = cy + s * 7;       // 終点（外側＝門）
+      const A = {stroke:"#1B2A4A", "stroke-width":"2", "stroke-linecap":"round", fill:"none"};
+      g.appendChild(el("path", Object.assign({d:`M${ax} ${ay} L${bx} ${by}`}, A)));
+      g.appendChild(el("path", Object.assign({d:`M${bx} ${by} l-6.5 0 M${bx} ${by} l0 ${-s * 6.5}`}, A)));
+      g.appendChild(el("path", Object.assign({d:`M${ax} ${ay} l6.5 0 M${ax} ${ay} l0 ${s * 6.5}`}, A)));
+      // ラベルは右端を枠の内側(x=400)に固定。中央揃えだと英語("South Gate")が枠から出る
+      g.appendChild(svgText(400, up ? f.y + 16 : f.y + 32, f.label[lang],
+        {"font-size":"11.5", fill:"#1B2A4A", "font-weight":"700", "text-anchor":"end"}));
+    } else if (f.type === "yagura") {
+      g.appendChild(el("rect", {x:f.x, y:f.y, width:f.w, height:f.h, rx:"3", fill:"#fff", stroke:"#E25A46", "stroke-width":"3.5"}));
+      // 太鼓アイコンとラベルを赤枠の中に上下で収める。
+      // WebPが読み込めない場合は絵文字にフォールバックする
+      const cxY = f.x + f.w / 2;
+      if (wadaikoOk) {
+        const ICON = 36;
+        const im = el("image", {x: cxY - ICON / 2, y: f.y + 9, width: ICON, height: ICON, href: WADAIKO_SRC});
+        im.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", WADAIKO_SRC); // 旧ブラウザ向け
+        g.appendChild(im);
+      } else {
+        g.appendChild(svgText(cxY, f.y + 34, "🥁", {"font-size":"24"}));
+      }
+      g.appendChild(svgText(cxY, f.y + 69, f.label[lang], {"font-size":"15", fill:"#B23A2E", "font-weight":"700"}));
+    } else if (f.type === "hq") {
+      g.appendChild(el("rect", {x:f.x, y:f.y, width:f.w, height:f.h, rx:"3", fill:"#E25A46"}));
+      f.label[lang].forEach((s, i) => {
+        g.appendChild(svgText(f.x + f.w/2, f.y + f.h/2 - 6 + i*17, s, {"font-size":"11.5", fill:"#fff", "font-weight":"700"}));
+      });
+    } else if (f.type === "soft") {
+      g.appendChild(el("rect", {x:f.x, y:f.y, width:f.w, height:f.h, rx:"4", fill:"#BAE0BD", stroke:"#8CC793", "stroke-width":"1.4"}));
+      f.label[lang].forEach((s, i) => {
+        g.appendChild(svgText(f.x + f.w/2, f.y + f.h/2 - 2 + i*14, s, {"font-size":"9.5", fill:"#1D6B3E", "font-weight":"700"}));
+      });
+    } else if (f.type === "wc") {
+      const rect = el("rect", {x:f.x, y:f.y, width:f.w, height:f.h, rx:"3", fill:"#fff", stroke:"#1B2A4A", "stroke-width":"1.6"});
+      g.appendChild(rect);
+      if (f.vertical) {
+        g.appendChild(svgVText(f.x + f.w/2, f.y + f.h/2 + 3, f.label[lang], {"font-size":"11", fill:"#1B2A4A", "font-weight":"700"}));
+      } else {
+        const t = svgText(f.x + f.w/2, f.y + f.h/2 + 4, f.label[lang], {"font-size":"10", fill:"#1B2A4A", "font-weight":"700"});
+        g.appendChild(t);
+        fitBoxes.push({rect, t, f});   // 描画後に文字幅へ合わせて箱を広げる
+      }
+    } else if (f.type === "stand") {
+      g.appendChild(svgVText(f.x, f.y, f.label[lang], {"font-size":"12", fill:"#4B5670", "font-weight":"700"}));
+    } else if (f.type === "note") {
+      // 2段組みを f.y（=トイレの箱の中心）に対して上下中央で配置する
+      const FS = 10.5, STEP = 14;
+      const lines = f.label[lang];
+      const y0 = f.y - (lines.length - 1) * STEP / 2 + FS * 0.35;
+      lines.forEach((s, i) => {
+        g.appendChild(svgText(f.x, y0 + i * STEP, s,
+          {"font-size":FS, fill:"#55648A", "font-weight":"700", "text-anchor":"end"}));
       });
     }
     layer.appendChild(g);
   });
+
+  // ラベルが箱からはみ出さないよう、描画後の実寸に合わせて箱幅を広げる。
+  // 英語の "WC (Community House)" は日本語の「トイレ（市民の家）」より長い。
+  fitBoxes.forEach(({rect, t, f}) => {
+    const need = t.getBBox().width + 16;
+    if (need > f.w) {
+      rect.setAttribute("width", need);
+      t.setAttribute("x", f.x + need / 2);
+    }
+  });
+}
+
+// 区画コードから接頭のエリア記号を外し、一覧と同じ丸数字にする（エリアは色で判別する）
+// "C-1" → "①" / "D-10" → "⑩"
+const CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳";
+const boothNo = code => {
+  const n = Number(code.replace(/^[A-D]-/, ""));
+  return CIRCLED[n - 1] || String(n);
+};
+
+function renderMap() {
+  renderFacilities();
+  const layer = document.getElementById("boothLayer");
+  layer.innerHTML = "";
+  vendors.forEach((v, idx) => {
+    const show = activeCat === "all" || v.cat === activeCat;
+    const isActive = activeKey === idx;
+    v.codes.forEach(code => {
+      const r = boothRects[code];
+      if (!r) return;
+      const g = el("g", {class:"booth-btn"});
+      g.style.opacity = show ? "1" : "0.22";
+      g.style.cursor = show ? "pointer" : "default";
+      g.style.transition = "opacity 0.2s";
+
+      g.appendChild(el("rect", {
+        x:r.x, y:r.y, width:r.w, height:r.h, rx:"4",
+        fill: isActive ? "#213A79" : areaFill[v.area],
+        stroke: isActive ? "#152A5E" : areaLine[v.area],
+        "stroke-width": isActive ? "2.5" : "1.4"
+      }));
+
+      const cx = r.x + r.w/2, cy = r.y + r.h/2;
+      g.appendChild(svgText(cx, cy - 3, v.icon, {"font-size":"13.5"}));
+      g.appendChild(svgText(cx, cy + 14, boothNo(code), {
+        "font-size":"13", fill: isActive ? "#fff" : areaInk[v.area], "font-weight":"700"
+      }));
+
+      if (show) g.addEventListener("click", () => toggleVendor(idx));
+      layer.appendChild(g);
+    });
+  });
+}
+
+function toggleVendor(idx) {
+  activeKey = activeKey === idx ? null : idx;
+  renderMap(); renderAreaCards(); showPopup();
+}
+
+// ===== 出店一覧（エリアカード） =====
+function renderAreaCards() {
+  const wrap = document.getElementById("areaCards");
+  // マップの並び（上段C → 左列D → 右列B → 下段A）に合わせた表示順
+  wrap.innerHTML = ["C","D","B","A"].map(area => {
+    const rows = vendors.map((v, idx) => ({v, idx})).filter(o => o.v.area === area).map(o => {
+      const v = o.v;
+      const dim = !(activeCat === "all" || v.cat === activeCat);
+      return `<li><button class="area-row${dim ? " dim" : ""}" onclick="toggleVendor(${o.idx})">
+        <span class="area-no">${v.no}</span>
+        <span class="area-body">
+          <span class="area-name">${v.name[lang]}<span class="area-emoji">${v.icon}</span></span>
+          <span class="area-org">${v.org[lang]}</span>
+        </span>
+      </button></li>`;
+    }).join("");
+    return `<div class="area-card area-${area}">
+      <ul class="area-list">${rows}</ul>
+    </div>`;
+  }).join("");
 }
 
 function showPopup() {
   const area = document.getElementById("popupArea");
   const overlay = document.getElementById("popupOverlay");
-  const hint = document.getElementById("mapHint");
-  if(hint) hint.textContent = i18n[lang].mapHint;
-  if(!activeId) {
+  if (activeKey === null) {
     area.innerHTML = "";
     overlay.classList.remove("open");
     document.body.style.overflow = "";
     return;
   }
-  const s = stalls.find(x => x.id === activeId);
-  const bg = catColors[s.cat], tc = catText[s.cat];
-  const label = catLabels[lang][s.cat];
-  const items = s.menu ? s.menu[lang] : null;
+  const v = vendors[activeKey];
+  const bg = catColors[v.cat], tc = catText[v.cat];
+  const items = v.menu ? v.menu[lang] : null;
   const rows = (items && items.length)
-    ? items.map(m => `<div class="menu-row"><span class="menu-name">${m}</span></div>`).join("")
+    ? items.map(m => {
+        const mt = m.match(/^(.*?)\s*((?:¥[\d,–\-]+|[\d,]+\s*(?:〜|–)?\s*[\d,]*\s*円(?:・[\d,]+円)?))$/);
+        return mt
+          ? `<div class="menu-row"><span class="menu-name">${mt[1]}</span><span class="menu-price">${mt[2]}</span></div>`
+          : `<div class="menu-row"><span class="menu-name">${m}</span></div>`;
+      }).join("")
     : `<div class="menu-row"><span class="menu-name">${i18n[lang].menuComingSoon}</span></div>`;
   area.innerHTML = `<div class="popup-card">
     <div class="popup-head">
-      <div class="popup-emoji" style="background:${bg}">${s.icon}</div>
+      <div class="popup-emoji" style="background:${areaFill[v.area]}">${v.icon}</div>
       <div>
-        <div class="popup-name">${s.name[lang]}</div>
-        <span class="cat-pill" style="background:${bg};color:${tc}">${label}</span>
+        <div class="popup-code">${v.no}</div>
+        <div class="popup-name">${v.name[lang]}</div>
+        <div class="popup-org">${v.org[lang]}</div>
+        <span class="cat-pill" style="background:${bg};color:${tc}">${catLabels[lang][v.cat]}</span>
       </div>
       <button class="popup-close" onclick="closePopup()" aria-label="閉じる">✕</button>
     </div>
@@ -1118,56 +1470,60 @@ function showPopup() {
   document.body.style.overflow = "hidden";
 }
 
-function closePopup() { activeId = null; renderMap(); showPopup(); }
+function closePopup() { activeKey = null; renderMap(); renderAreaCards(); showPopup(); }
 
-document.addEventListener("keydown", e => { if(e.key === "Escape" && activeId) closePopup(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && activeKey !== null) closePopup(); });
 
 document.querySelector(".filter-bar").addEventListener("click", e => {
   const btn = e.target.closest(".fbtn");
-  if(!btn) return;
+  if (!btn) return;
   activeCat = btn.dataset.cat;
-  activeId = null;
+  activeKey = null;
   document.querySelectorAll(".fbtn").forEach(b => b.classList.remove("on"));
   btn.classList.add("on");
-  renderMap(); showPopup();
+  renderMap(); renderAreaCards(); showPopup();
 });
 
 // ===== SCHEDULE =====
-function toMinutes(t) { const [h,m] = t.split(":").map(Number); return h*60+m; }
+function toMinutes(t) { const [h, m] = t.split(":").map(Number); return h * 60 + m; }
 
 function renderTimeline() {
   const tl = document.getElementById("timeline");
-  const events = schedule;
   const now = new Date();
   const nowMin = now.getHours() * 60 + now.getMinutes();
   const t = i18n[lang];
 
   let nowIdx = -1, nextIdx = -1;
-  events.forEach((e,i) => {
+  schedule.forEach((e, i) => {
     const s = toMinutes(e.time), end = e.dur > 0 ? s + e.dur : s + 1;
-    if(nowMin >= s && nowMin < end) nowIdx = i;
+    if (nowMin >= s && nowMin < end) nowIdx = i;
   });
-  if(nowIdx === -1) {
-    for(let i = 0; i < events.length; i++) {
-      if(toMinutes(events[i].time) > nowMin) { nextIdx = i; break; }
+  if (nowIdx === -1) {
+    for (let i = 0; i < schedule.length; i++) {
+      if (toMinutes(schedule[i].time) > nowMin) { nextIdx = i; break; }
     }
-  } else if(nowIdx + 1 < events.length) nextIdx = nowIdx + 1;
+  } else if (nowIdx + 1 < schedule.length) nextIdx = nowIdx + 1;
 
-  tl.innerHTML = events.map((e, i) => {
+  tl.innerHTML = schedule.map((e, i) => {
     const isNow = i === nowIdx, isNext = i === nextIdx;
-    const badge = isNow
-      ? `<span class="badge badge-now">${t.badgeNow}</span>`
-      : isNext ? `<span class="badge badge-next">${t.badgeNext}</span>` : "";
-    const hasNext = i < events.length - 1;
+    const badge = isNow ? `<span class="badge badge-now">${t.badgeNow}</span>`
+                : isNext ? `<span class="badge badge-next">${t.badgeNext}</span>` : "";
+    const acts = e.acts.map((a, j) => `<li class="tl-act">
+        <span class="tl-act-name"${e.end ? ' style="color:var(--text2)"' : ""}>${a.name[lang]}${j === 0 ? badge : ""}</span>
+        ${a.org ? `<span class="tl-act-org">／ ${a.org[lang]}</span>` : ""}
+      </li>`).join("");
     return `<div class="tl-row">
-      <div class="tl-time">${e.time}</div>
+      <div class="tl-time">${e.time}${e.end ? "" : "〜"}</div>
       <div class="tl-axis">
-        <div class="tl-dot" style="background:${isNow?"#1E90C9":isNext?"#FFDE59":"transparent"};border-color:${isNow?"#1573A3":isNext?"#C99A00":"#1E90C9"}"></div>
-        ${hasNext ? `<div class="tl-line"></div>` : ""}
+        <div class="tl-dot${isNow ? " now" : isNext ? " next" : ""}"></div>
+        ${i < schedule.length - 1 ? `<div class="tl-line"></div>` : ""}
       </div>
-      <div class="tl-card${isNow?" now":""}${e.transition?" transition":""}">
-        <div class="tl-title">${e.title[lang]}${badge}</div>
-        ${e.desc[lang] ? `<div class="tl-desc">${e.desc[lang]}</div>` : ""}
+      <div class="tl-body">
+        <ul class="tl-acts">${acts}</ul>
+        ${e.bubble ? `<div class="bubble-wrap">
+          <div class="bubble">${e.bubble[lang]}</div>
+          ${e.bubbleIcon ? `<img class="bubble-icon" src="${e.bubbleIcon}" alt="" onerror="this.remove()">` : ""}
+        </div>` : ""}
       </div>
     </div>`;
   }).join("");
@@ -1176,25 +1532,45 @@ function renderTimeline() {
 // ===== SPONSORS =====
 function renderSponsors() {
   const grid = document.getElementById("sponsorGrid");
-  grid.innerHTML = sponsors.map(s => {
-    // img（webp）が設定されていれば画像バナー、未設定ならテキストバナーで表示
+  grid.innerHTML = sponsors.map((s, i) => {
+    const fallback = `<span class=&quot;sponsor-no&quot;>${i + 1}</span><span class=&quot;sponsor-name&quot;>${s.name[lang]}</span>`;
     const body = s.img
-      ? `<img class="sponsor-banner" src="${s.img}" alt="${s.name[lang]}" loading="lazy">`
-      : `<div class="sponsor-logo">${s.icon}</div>
-         <div class="sponsor-name">${s.name[lang]}</div>
-         <div class="sponsor-link-icon">🔗</div>`;
-    return `<a class="sponsor-card${s.img ? " has-img" : ""}" href="${s.url}" target="_blank" rel="noopener">${body}</a>`;
+      ? `<img class="sponsor-banner" src="${encodeURI(s.img)}" alt="${s.name[lang]}" loading="lazy"
+             onerror="this.closest('.sponsor-card').classList.remove('has-img');this.outerHTML='${fallback}'">`
+      : `<span class="sponsor-no">${i + 1}</span><span class="sponsor-name">${s.name[lang]}</span>`;
+    const cls = `sponsor-card${s.img ? " has-img" : ""}`;
+    // URLが台帳にある協賛社のみリンク化。未記入の社はリンクなしで表示する。
+    return s.url
+      ? `<a class="${cls}" href="${s.url}" target="_blank" rel="noopener noreferrer" title="${s.name[lang]}">${body}</a>`
+      : `<div class="${cls}">${body}</div>`;
   }).join("");
 }
 
 // ===== REQUESTS =====
 function renderRequests() {
-  const list = document.getElementById("requestList");
-  list.innerHTML = requests.map(r => `<li><span class="request-arrow">▶</span><span>${r[lang]}</span></li>`).join("");
+  document.getElementById("requestList").innerHTML =
+    requests.map(r => `<li><span class="request-arrow">▶</span><span>${r[lang]}</span></li>`).join("");
+}
+
+// ===== 花火（WebP → 線画SVG フォールバック） =====
+// 画像が実際にデコードできたときだけ .webp-ok を付けて差し替える。
+// WebP非対応や画像欠損の場合は何もせず、線画SVGが表示されたままになる。
+function initHanabi() {
+  document.querySelectorAll(".hanabi-img").forEach(img => {
+    const swap = () => img.closest(".firework-deco").classList.add("webp-ok");
+    if (img.complete) {
+      if (img.naturalWidth > 0) swap();   // キャッシュ済み。失敗時は何もしない
+    } else {
+      img.addEventListener("load", swap, {once:true});
+    }
+  });
 }
 
 // ===== INIT =====
+initHanabi();
+initWadaiko();
 renderMap();
+renderAreaCards();
 renderTimeline();
 renderSponsors();
 renderRequests();

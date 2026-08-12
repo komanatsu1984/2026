@@ -6,7 +6,7 @@
 <title>こまよせ夏祭り 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&family=Shippori+Antique+B1&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
   /* ===== パンフレット（paper01 / paper02）準拠のカラーパレット ===== */
   :root {
@@ -83,8 +83,12 @@
   }
 
   .header-badge {
+    /* 秀英アンチック（DNP・商用フォント）がPCにあればそれを使用し、
+       無ければWeb提供の同系アンチック体「しっぽりアンチック B1」にフォールバック */
+    font-family: 'DNP 秀英アンチック Std B', 'DNP 秀英アンチック Std', '秀英アンチック',
+                 'Shippori Antique B1', 'Shippori Antique', 'Zen Maru Gothic', sans-serif;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--orange-bright);
     letter-spacing: 0.1em;
     line-height: 1.45;
@@ -92,9 +96,10 @@
   }
 
   .header-title {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-family: 'DNP 秀英アンチック Std B', 'DNP 秀英アンチック Std', '秀英アンチック',
+                 'Shippori Antique B1', 'Shippori Antique', 'M PLUS Rounded 1c', sans-serif;
     font-size: clamp(38px, 12vw, 64px);
-    font-weight: 800;
+    font-weight: 400;
     color: var(--orange-bright);
     line-height: 1.05;
     letter-spacing: 0.1em;
@@ -960,7 +965,7 @@ const vendors = [
    menu:{ja:["駄菓子いろいろ"],en:["Assorted penny candy"]}},
   {area:"A", no:"③", codes:["A-3"], cat:"game", icon:"⚽",
    name:{ja:"キックターゲット",en:"Kick Target"}, org:{ja:"駒寄滝の沢SC",en:"Komayose Takinosawa SC"},
-   menu:{ja:["キックターゲット 1回100円","光る玩具販売 100〜200円"],en:["Kick target ¥100/try","Glow toys ¥100–200"]}},
+   menu:{ja:["キックターゲット 1回100円","光る玩具販売 200円"],en:["Kick target ¥100/try","Glow toys ¥200"]}},
   {area:"A", no:"④", codes:["A-4"], cat:"game", icon:"🚂",
    name:{ja:"ミニSL",en:"Mini Steam Train"}, org:{ja:"こども汽車",en:"Kids Train"},
    menu:{ja:["ミニSL乗車（こども汽車）"],en:["Mini SL ride (kids train)"]}},
@@ -968,19 +973,19 @@ const vendors = [
   // ===== B（右列・実行委員会） =====
   {area:"B", no:"①②", codes:["B-1","B-2"], cat:"food", icon:"🍢",
    name:{ja:"焼き鳥・ビール・飲み物",en:"Yakitori, Beer & Drinks"}, org:{ja:"実行委員会",en:"Festival Committee"},
-   menu:{ja:["焼き鳥","生ビール","ソフトドリンク"],en:["Yakitori","Draft beer","Soft drinks"]}},
+   menu:{ja:["焼き鳥 100円","生ビール 500円","ソフトドリンク 150円"],en:["Yakitori ¥100","Draft beer ¥500","Soft drinks ¥150"]}},
   {area:"B", no:"③", codes:["B-3"], cat:"game", icon:"🥎",
    name:{ja:"スーパーボール／人形すくい",en:"Super Ball & Doll Scooping"}, org:{ja:"実行委員会",en:"Festival Committee"},
-   menu:{ja:["スーパーボールすくい","人形すくい"],en:["Super ball scooping","Doll scooping"]}},
+   menu:{ja:["スーパーボールすくい 100円","人形すくい 100円"],en:["Super ball scooping ¥100","Doll scooping ¥100"]}},
   {area:"B", no:"④", codes:["B-4"], cat:"food", icon:"🍧",
    name:{ja:"かき氷",en:"Shaved Ice"}, org:{ja:"実行委員会",en:"Festival Committee"},
-   menu:{ja:["かき氷"],en:["Shaved ice"]}},
+   menu:{ja:["かき氷 200円"],en:["Shaved ice ¥200"]}},
   {area:"B", no:"⑤⑥", codes:["B-5","B-6"], cat:"game", icon:"🎈",
    name:{ja:"ヨーヨーすくい／木札ワークショップ",en:"Yo-yo Scooping & Wood Tag Workshop"}, org:{ja:"実行委員会",en:"Festival Committee"},
-   menu:{ja:["ヨーヨーすくい","木札ワークショップ"],en:["Yo-yo scooping","Wood name-tag workshop"]}},
+   menu:{ja:["ヨーヨーすくい 100円","木札ワークショップ"],en:["Yo-yo scooping ¥100","Wood name-tag workshop"]}},
   {area:"B", no:"⑦", codes:["B-7"], cat:"food", icon:"🍞",
    name:{ja:"あげぱん",en:"Fried Bread"}, org:{ja:"実行委員会",en:"Festival Committee"},
-   menu:{ja:["あげぱん"],en:["Age-pan (fried bread)"]}},
+   menu:{ja:["あげぱん 100円"],en:["Age-pan (fried bread) ¥100"]}},
 
   // ===== C（上段・南口側）左→右 =====
   {area:"C", no:"①", codes:["C-1"], cat:"food", icon:"🦑",
@@ -999,7 +1004,7 @@ const vendors = [
    name:{ja:"ワークショップ・くじ",en:"Workshop & Lottery"}, org:{ja:"藤翠會",en:"Tosui-kai"},
    menu:{ja:["ビーズワークショップ 400円・500円","アクセサリーくじ 300〜400円"],en:["Beads workshop ¥400 / ¥500","Accessory lottery ¥300–400"]}},
   {area:"C", no:"⑥", codes:["C-6"], cat:"game", icon:"🐟",
-   name:{ja:"お魚すくい",en:"Fish Scooping"}, org:{ja:"Fish loving uncle",en:"Fish loving uncle"},
+   name:{ja:"金魚だけじゃないすくい",en:"More Than Goldfish Scooping"}, org:{ja:"Fish loving uncle",en:"Fish loving uncle"},
    menu:{ja:["すくいポイ 200円","メダカボトル 500円","水草 1束100円"],en:["Scoop poi ¥200","Medaka bottle ¥500","Water plants ¥100/bunch"]}},
 
   // ===== D（左列） =====
@@ -1007,8 +1012,9 @@ const vendors = [
    name:{ja:"ドリロコス・フランクフルト",en:"Dorilocos & Frankfurter"}, org:{ja:"Ms'kitchen",en:"Ms' Kitchen"},
    menu:{ja:["ドリロコス","フランクフルト"],en:["Dorilocos","Frankfurter"]}},
   {area:"D", no:"②", codes:["D-2"], cat:"food", icon:"🍺",
-   name:{ja:"ビール・ラムネ・焼き鳥・お茶",en:"Beer, Ramune, Yakitori & Tea"}, org:{ja:"スマイルカンパニー",en:"Smile Company"},
-   menu:{ja:["ビール 400円","ラムネ 200円","お茶 200円","焼き鳥 150円"],en:["Beer ¥400","Ramune ¥200","Tea ¥200","Yakitori ¥150"]}},
+   name:{ja:"ビール・酎ハイ・ラムネ・焼き鳥・お茶",en:"Beer, Chuhai, Ramune, Yakitori & Tea"}, org:{ja:"一般社団法人 湘南スマイルカンパニー",en:"Shonan Smile Company"},
+   menu:{ja:["ビール 400円","酎ハイ（レモンサワー） 300円","ラムネ 200円","お茶 200円","焼き鳥 150円"],
+         en:["Beer ¥400","Chuhai (lemon sour) ¥300","Ramune ¥200","Tea ¥200","Yakitori ¥150"]}},
   {area:"D", no:"③④", codes:["D-3","D-4"], cat:"food", icon:"🍡",
    name:{ja:"タコ焼き・クレープ",en:"Takoyaki & Crêpes"}, org:{ja:"リフシア大庭",en:"Refucia Oba"},
    menu:{ja:["たこ焼き（5〜6個）350円","クレープ（生クリーム／カスタード／バナナ／チョコ）300〜400円"],
@@ -1118,6 +1124,8 @@ const sponsors = [
    url:"https://www.win-coffee.co.jp/"},
   {name:{ja:"とろわふれーる",en:"Trois Frères"}, img:"img/bannerWebp/27_とろわふれーる.webp",
    url:"https://www.instagram.com/troisfreres5214/"},
+  {name:{ja:"康和電気",en:"Kowa Denki"}, img:"img/bannerWebp/28_康和電気.webp",
+   url:""},
 ];
 
 const areaFill = {A:"#FFDBF8", B:"#BAE3FF", C:"#BAE0BD", D:"#FFF6BA"};

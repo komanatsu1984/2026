@@ -660,6 +660,102 @@
 
   footer .footer-copy { margin-top: 12px; font-size: 10.5px; color: rgba(255,255,255,0.85); }
 
+  /* ===== 来場者アンケートCTA（画面下部固定） =====
+     開催時間帯に応じて 弱(B)→中(C)→強(D)→最大(E) と存在感を上げる。
+     時刻判定は surveyLevel()、文案は surveyText を参照。 */
+  .survey-cta {
+    position: fixed;
+    left: 12px; right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));  /* iPhoneのホームインジケーター対応 */
+    max-width: 616px;          /* .section の640px幅 − 左右余白 */
+    margin: 0 auto;
+    z-index: 150;              /* nav(100)より上、出店モーダル(200)より下 */
+    display: none;
+  }
+  .survey-cta.show { display: block; animation: ctaUp 0.3s ease; }
+  @keyframes ctaUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  .survey-cta a {
+    display: block;
+    font-family: inherit;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 弱（16:00〜18:29）｜機能ボタンに近い表現。コンテンツを隠しすぎない小型バー */
+  .survey-cta.lv-b a {
+    height: 46px;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    background: rgba(26,47,99,0.93);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    color: #fff; font-size: 14px; font-weight: 700; letter-spacing: 0.02em;
+    box-shadow: 0 4px 16px rgba(8,18,45,0.34);
+    backdrop-filter: blur(6px);
+  }
+
+  /* 中（18:30〜19:29）｜行動喚起。1段階拡大し「約1分半」を添える */
+  .survey-cta.lv-c a {
+    display: flex; align-items: center; gap: 10px;
+    min-height: 60px; padding: 11px 14px 11px 16px;
+    background: var(--orange);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(160,58,0,0.38);
+  }
+  .survey-cta.lv-c .cta-main {
+    flex: 1; color: #fff; font-size: 14px; font-weight: 700; line-height: 1.45;
+  }
+  .survey-cta.lv-c .cta-sub {
+    flex-shrink: 0; white-space: nowrap;
+    background: rgba(255,255,255,0.24); color: #fff;
+    font-size: 11px; font-weight: 700;
+    padding: 4px 9px; border-radius: 999px;
+  }
+
+  /* 強（19:30〜19:59）・最大（20:00以降）｜カード形式 */
+  .survey-cta.lv-d a, .survey-cta.lv-e a { padding: 14px 15px 15px; border-radius: 17px; }
+  .survey-cta.lv-d a {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 26px rgba(8,18,45,0.36);
+  }
+  .survey-cta.lv-e a {
+    background: linear-gradient(180deg, #FF6A0E 0%, var(--orange) 100%);
+    box-shadow: 0 8px 28px rgba(160,58,0,0.46);
+  }
+  .survey-cta .cta-title { display: block; font-size: 15px; font-weight: 700; line-height: 1.45; }
+  .survey-cta .cta-body  { display: block; font-size: 12px; line-height: 1.6; margin-top: 3px; }
+  .survey-cta .cta-btn {
+    display: block; margin-top: 11px;
+    text-align: center; padding: 11px 12px;
+    font-size: 14px; font-weight: 700; border-radius: 999px;
+  }
+  .survey-cta.lv-d .cta-title { color: var(--orange); }
+  .survey-cta.lv-d .cta-body  { color: var(--text2); }
+  .survey-cta.lv-d .cta-btn   { background: var(--orange); color: #fff; }
+  .survey-cta.lv-e .cta-title { color: #fff; }
+  .survey-cta.lv-e .cta-body  { color: rgba(255,255,255,0.92); }
+  .survey-cta.lv-e .cta-btn   { background: #fff; color: var(--orange); }
+
+  /* ===== 祭り終了後（20:00以降）のみ、ファーストビューにも導線を出す ===== */
+  .survey-top { display: none; }
+  .survey-top.show { display: block; margin: 14px 0 2px; animation: ctaUp 0.3s ease; }
+  .survey-top .st-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 16px;
+    padding: 14px 15px 15px;
+    text-align: center;
+  }
+  .survey-top .st-title { font-size: 14.5px; font-weight: 700; color: #fff; line-height: 1.5; }
+  .survey-top .st-body  { font-size: 12px; color: rgba(255,255,255,0.88); line-height: 1.6; margin-top: 4px; }
+  .survey-top .st-btn {
+    display: block; margin-top: 11px; padding: 11px 12px;
+    background: var(--orange); color: #fff;
+    font-family: inherit; font-size: 14px; font-weight: 700;
+    border-radius: 999px; text-decoration: none;
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (min-width: 640px) {
     .section, nav, .header-content { max-width: 640px; margin-left: auto; margin-right: auto; }
@@ -733,6 +829,8 @@
       <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
       <button class="lang-btn" onclick="setLang('en')">English</button>
     </div>
+    <!-- 祭り終了後（20:00以降）のみ表示されるアンケート導線。中身は renderSurveyCta() が入れる -->
+    <div class="survey-top" id="surveyTop"></div>
   </div>
 </header>
 
@@ -892,6 +990,9 @@
     <div class="footer-copy">© 2026 <span id="footerCopyName">駒寄地区夏祭り実行委員会</span></div>
   </div>
 </footer>
+
+<!-- 画面下部固定のアンケートCTA。中身は renderSurveyCta() が時間帯に応じて入れる -->
+<div class="survey-cta" id="surveyCta"></div>
 
 <script>
 /* =======================================================================
@@ -1150,6 +1251,76 @@ const requests = [
   {ja:"近隣へお住まいの皆さまにはご迷惑をお掛けしますが何卒ご理解の程よろしくお願いします",en:"We appreciate the understanding of everyone living nearby."},
 ];
 
+/* =======================================================================
+   来場者アンケートCTA（設定）
+
+   ★★★ Googleフォームが完成したら url にURLを貼ること ★★★
+   url が空のあいだCTAは一切表示されない（リンク先の無いCTAを公開しないため）。
+
+   時間帯によって存在感を4段階で上げる。祭りは 2026-08-22 16:00〜20:00。
+     16:00前      … 非表示（体験前の回答流入を防ぐ）
+     16:00〜18:29 … 弱：小型固定ボタン
+     18:30〜19:29 … 中：1段階拡大＋「約1分半」
+     19:30〜19:59 … 強：固定カード
+     20:00以降    … 最大：固定カード＋ファーストビューにも導線
+   翌日以降も「最大」のまま表示を続ける（後日回答を受け付けるため）。
+   ======================================================================= */
+const SURVEY = {
+  url: "https://docs.google.com/forms/d/e/1FAIpQLSe97mx1_ugEEsdtV8NVMBryw3agJr-oaVEJ-UiYyrwQ8xqzlA/viewform",
+  festivalDate: "2026-08-22",   // 開催日（YYYY-MM-DD）
+  hideAfter: "2026-09-30",                // 例: "2026-09-30" … この日を過ぎたら非表示。空ならずっと表示
+  forceLevel: "",               // 表示確認用: "B" "C" "D" "E" を入れるとその状態で固定。公開時は空に戻す
+};
+
+// 現在時刻から表示レベルを決める。"A" は非表示。
+function surveyLevel(now = new Date()) {
+  if (SURVEY.forceLevel) return SURVEY.forceLevel;
+  const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const today = ymd(now);
+  if (SURVEY.hideAfter && today > SURVEY.hideAfter) return "A";
+  if (today < SURVEY.festivalDate) return "A";   // 開催前
+  if (today > SURVEY.festivalDate) return "E";   // 翌日以降
+  const min = now.getHours() * 60 + now.getMinutes();
+  if (min < 16 * 60)      return "A";            // 〜15:59
+  if (min < 18 * 60 + 30) return "B";            // 16:00〜18:29
+  if (min < 19 * 60 + 30) return "C";            // 18:30〜19:29
+  if (min < 20 * 60)      return "D";            // 19:30〜19:59
+  return "E";                                    // 20:00〜
+}
+
+const surveyText = {
+  ja: {
+    aria: "来場者アンケートに回答する",
+    b: "📝 アンケート",
+    cMain: "📝 今日のお祭りの感想を教えてください",
+    cSub: "約1分半",
+    dTitle: "来年のお祭りについて教えてください",
+    dBody: "今年よかったもの・来年増やしてほしいものを教えてください。",
+    dBtn: "約1分半で回答する →",
+    eTitle: "来年のお祭りづくりに参加する",
+    eBody: "今年よかったもの・来年増やしてほしいものを教えてください。",
+    eBtn: "1分半でアンケートに回答する →",
+    topTitle: "本日はご来場ありがとうございました",
+    topBody: "来年のお祭りをより良くするため、ぜひご意見をお聞かせください。",
+    topBtn: "1分半でアンケートに回答する →",
+  },
+  en: {
+    aria: "Answer the visitor survey",
+    b: "📝 Survey",
+    cMain: "📝 Tell us how the festival was for you",
+    cSub: "About 90 sec",
+    dTitle: "Help us plan next year's festival",
+    dBody: "Tell us what you enjoyed this year and what you'd like more of next year.",
+    dBtn: "Answer in about 90 seconds →",
+    eTitle: "Help shape next year's festival",
+    eBody: "Tell us what you enjoyed this year and what you'd like more of next year.",
+    eBtn: "Take the 90-second survey →",
+    topTitle: "Thank you for coming today",
+    topBody: "Please share your thoughts to help us make next year's festival even better.",
+    topBtn: "Take the 90-second survey →",
+  }
+};
+
 let lang = "ja";
 let activeKey = null;   // vendors のインデックス
 let activeCat = "all";
@@ -1241,6 +1412,7 @@ function setLang(l) {
   renderTimeline();
   renderSponsors();
   renderRequests();
+  renderSurveyCta(true);
   if (activeKey !== null) showPopup();
 }
 
@@ -1555,6 +1727,49 @@ function renderSponsors() {
   }).join("");
 }
 
+// ===== 来場者アンケートCTA =====
+let surveyShownLv = null;   // 直前に描画したレベル。30秒ごとの再判定で無駄な再描画をしない
+function renderSurveyCta(force) {
+  const cta = document.getElementById("surveyCta");
+  const top = document.getElementById("surveyTop");
+  // URL未設定のときは表示しない（forceLevel を入れた表示確認時のみ描画する）
+  const enabled = !!(SURVEY.url || SURVEY.forceLevel);
+  const lv = enabled ? surveyLevel() : "A";
+  if (!force && lv === surveyShownLv) return;
+  surveyShownLv = lv;
+
+  const t = surveyText[lang];
+  const attr = SURVEY.url
+    ? `href="${SURVEY.url}" target="_blank" rel="noopener noreferrer"`
+    : `href="#" onclick="return false"`;          // URL未設定の表示確認時は遷移させない
+  const link = inner => `<a ${attr} aria-label="${t.aria}">${inner}</a>`;
+  const card = (title, body, btn) =>
+    link(`<span class="cta-title">${title}</span><span class="cta-body">${body}</span><span class="cta-btn">${btn}</span>`);
+
+  const bodies = {
+    B: () => link(t.b),
+    C: () => link(`<span class="cta-main">${t.cMain}</span><span class="cta-sub">${t.cSub}</span>`),
+    D: () => card(t.dTitle, t.dBody, t.dBtn),
+    E: () => card(t.eTitle, t.eBody, t.eBtn),
+  };
+
+  cta.className = "survey-cta" + (bodies[lv] ? ` show lv-${lv.toLowerCase()}` : "");
+  cta.innerHTML = bodies[lv] ? bodies[lv]() : "";
+
+  // 祭り終了後だけファーストビューにも出す
+  top.className = "survey-top" + (lv === "E" ? " show" : "");
+  top.innerHTML = lv === "E" ? `<div class="st-card">
+      <div class="st-title">${t.topTitle}</div>
+      <div class="st-body">${t.topBody}</div>
+      <a class="st-btn" ${attr}>${t.topBtn}</a>
+    </div>` : "";
+
+  // 固定CTAでフッターが隠れないよう、実際の高さぶん下に余白を作る
+  document.body.style.paddingBottom = bodies[lv]
+    ? `calc(${cta.offsetHeight + 26}px + env(safe-area-inset-bottom, 0px))`
+    : "";
+}
+
 // ===== REQUESTS =====
 function renderRequests() {
   document.getElementById("requestList").innerHTML =
@@ -1583,6 +1798,8 @@ renderAreaCards();
 renderTimeline();
 renderSponsors();
 renderRequests();
+renderSurveyCta(true);
+setInterval(renderSurveyCta, 30000);   // 時間帯が変わったらCTAを差し替える
 </script>
 </body>
 </html>

@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SWL2MRF5XR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SWL2MRF5XR');
+</script>
+
 <title>こまよせ夏祭り 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -950,7 +961,7 @@
     <div class="notice-icon">🚭</div>
     <div class="notice-text">
       <div class="notice-title" id="noticeTitle2">禁煙・ゴミについて</div>
-      <span id="noticeBody2">学校周辺は全面禁煙です。ゴミは分別のうえ所定のゴミ箱をご利用いただくか、お持ち帰りください。</span>
+      <span id="noticeBody2">学校周辺は全面禁煙です。ゴミは分別のうえ所定のゴミ箱をご利用いただくか、お持ち帰りください。ゴミ箱は本部横にあります。</span>
     </div>
   </div>
   <div class="info-note">
@@ -1044,6 +1055,8 @@ const facilities = [
    label:{ja:["🚲 駐輪場","おおばまるやま公園"], en:["🚲 Bicycle Parking","Ooba Maruyama Park"]}},
   // トイレ（スタンド側）
   {type:"wc", x:366, y:544, w:38, h:58, vertical:true, label:{ja:"トイレ",en:"WC"}},
+  // ゴミ箱（右列・本部の横、トイレの下）。トイレと左右幅を揃えている
+  {type:"trash", x:366, y:674, w:38, h:94, vertical:true, label:{ja:"ゴミ箱",en:"Trash"}},
   // スタンド・校舎（帯の見出し）
   {type:"stand", x:385, y:400, label:{ja:"スタンド・校舎",en:"Stand"}},
 ];
@@ -1347,7 +1360,7 @@ const i18n = {
     noticeTitleBike:"駐輪について", noticeBodyBike:"自転車は「おおばまるやま公園」に駐輪をお願いします。グラウンドへの自転車・バイクの乗り入れはできません。",
     noticeTitleWc:"トイレ", noticeBodyWc:"グラウンド北側（スタンド・校舎側）と、南西角の「市民の家」の2か所です。",
     noticeTitleHq:"本部・抽選箱", noticeBodyHq:"グラウンド北東側の本部テントに抽選箱があります。19:30〜「こまよせ大抽選会」を行います。",
-    noticeTitle2:"禁煙・ゴミについて", noticeBody2:"学校周辺は全面禁煙です。ゴミは分別のうえ所定のゴミ箱をご利用いただくか、お持ち帰りください。",
+    noticeTitle2:"禁煙・ゴミについて", noticeBody2:"学校周辺は全面禁煙です。ゴミは分別のうえ所定のゴミ箱をご利用いただくか、お持ち帰りください。ゴミ箱は本部横にあります。",
     noticeTitle3:"迷子・救護について", noticeBody3:"迷子や体調不良の際は本部テントまでお越しください。スタッフが対応いたします。",
     requestTitle:"お願い",
     menuComingSoon:"メニュー準備中",
@@ -1378,7 +1391,7 @@ const i18n = {
     noticeTitleBike:"Bicycle Parking", noticeBodyBike:"Please park bicycles at Ooba Maruyama Park. Bicycles and motorbikes are not allowed on the grounds.",
     noticeTitleWc:"Restrooms", noticeBodyWc:"Two locations: the north side of the grounds (stand / school building side), and the Community House at the southwest corner.",
     noticeTitleHq:"HQ & Raffle Box", noticeBodyHq:"The raffle box is at the HQ tent on the northeast side of the grounds. The Komayose Grand Raffle starts at 7:30 PM.",
-    noticeTitle2:"No Smoking & Waste", noticeBody2:"The area around the school is entirely smoke-free. Please sort your trash and use the designated bins, or take it home.",
+    noticeTitle2:"No Smoking & Waste", noticeBody2:"The area around the school is entirely smoke-free. Please sort your trash and use the designated bins, or take it home. The bins are next to the HQ tent.",
     noticeTitle3:"Lost Children & First Aid", noticeBody3:"For lost children or medical concerns, please come to the HQ tent. Staff will assist you.",
     requestTitle:"Please Note",
     menuComingSoon:"Menu coming soon",
@@ -1416,12 +1429,34 @@ function setLang(l) {
   if (activeKey !== null) showPopup();
 }
 
+/* ===== アクセス解析（GA4）=====
+   このページはタブ切替がJavaScript（1ページ内での表示切替）なので、
+   GA4の自動計測だけではタブごとの閲覧数が取れない。そのため下記の
+   イベントを自分で送っている。
+
+     tab_view_map / tab_view_schedule / tab_view_sponsors / tab_view_info
+        … どのタブが見られたか。GA4の「レポート ＞ エンゲージメント ＞ イベント」に
+          そのまま4行並ぶので、追加設定なしで比較できる。
+     survey_cta_click
+        … アンケートCTAのタップ数（合計）。
+          パラメータ cta_level（B〜E＝時間帯）と cta_place（bottom/top）付き。
+          時間帯別・場所別に見たい場合のみ、GA4の
+          「管理 ＞ カスタム定義 ＞ カスタムディメンションを作成」で
+          cta_level / cta_place をイベント スコープで登録する（登録は任意）。
+
+   gtag が読み込めない環境（広告ブロッカー等）でもページが壊れないよう、
+   必ず typeof で確認してから呼ぶ。 */
+function track(name, params) {
+  if (typeof gtag === "function") gtag("event", name, params || {});
+}
+
 // ===== SECTIONS =====
 function switchSection(id) {
   document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.sec === id));
   document.getElementById("sec-" + id).classList.add("active");
   window.scrollTo({top: 0, behavior: "smooth"});
+  track("tab_view_" + id, {tab_name: id});
 }
 
 // ===== MAP =====
@@ -1518,6 +1553,13 @@ function renderFacilities() {
         g.appendChild(t);
         fitBoxes.push({rect, t, f});   // 描画後に文字幅へ合わせて箱を広げる
       }
+    } else if (f.type === "trash") {
+      // トイレと同じ「施設の箱」だが、屋台と見分けやすいよう薄いグレー地にしている。
+      // やぐらと同じく、アイコンを上・ラベルを下に置く
+      g.appendChild(el("rect", {x:f.x, y:f.y, width:f.w, height:f.h, rx:"3", fill:"#F2F4F8", stroke:"#1B2A4A", "stroke-width":"1.6"}));
+      const cxT = f.x + f.w / 2;
+      g.appendChild(svgText(cxT, f.y + 27, "🗑", {"font-size":"18"}));
+      g.appendChild(svgVText(cxT, f.y + 66, f.label[lang], {"font-size":"11", fill:"#1B2A4A", "font-weight":"700"}));
     } else if (f.type === "stand") {
       g.appendChild(svgVText(f.x, f.y, f.label[lang], {"font-size":"12", fill:"#4B5670", "font-weight":"700"}));
     } else if (f.type === "note") {
@@ -1739,10 +1781,12 @@ function renderSurveyCta(force) {
   surveyShownLv = lv;
 
   const t = surveyText[lang];
-  const attr = SURVEY.url
-    ? `href="${SURVEY.url}" target="_blank" rel="noopener noreferrer"`
+  // 別タブで開くので、遷移でイベント送信が中断されることはない
+  const attr = place => SURVEY.url
+    ? `href="${SURVEY.url}" target="_blank" rel="noopener noreferrer"` +
+      ` onclick="track('survey_cta_click',{cta_level:'${lv}',cta_place:'${place}'})"`
     : `href="#" onclick="return false"`;          // URL未設定の表示確認時は遷移させない
-  const link = inner => `<a ${attr} aria-label="${t.aria}">${inner}</a>`;
+  const link = inner => `<a ${attr("bottom")} aria-label="${t.aria}">${inner}</a>`;
   const card = (title, body, btn) =>
     link(`<span class="cta-title">${title}</span><span class="cta-body">${body}</span><span class="cta-btn">${btn}</span>`);
 
@@ -1761,7 +1805,7 @@ function renderSurveyCta(force) {
   top.innerHTML = lv === "E" ? `<div class="st-card">
       <div class="st-title">${t.topTitle}</div>
       <div class="st-body">${t.topBody}</div>
-      <a class="st-btn" ${attr}>${t.topBtn}</a>
+      <a class="st-btn" ${attr("top")}>${t.topBtn}</a>
     </div>` : "";
 
   // 固定CTAでフッターが隠れないよう、実際の高さぶん下に余白を作る
@@ -1800,6 +1844,9 @@ renderSponsors();
 renderRequests();
 renderSurveyCta(true);
 setInterval(renderSurveyCta, 30000);   // 時間帯が変わったらCTAを差し替える
+// 初期表示は switchSection() を通らないので、屋台マップの分だけ手動で送る
+// （これが無いと屋台マップの閲覧数だけ極端に少なく出る）
+track("tab_view_map", {tab_name: "map"});
 </script>
 </body>
 </html>
